@@ -11,7 +11,7 @@ namespace PacMan
     public class Maze : DataGridView
     {
         private const int NROWSCOLUMNS = 20;                          // Number of cells in each row and column
-        private const int CELLSIZE = 27;
+        private const int CELLSIZE = 37;
         private const int SPACESIZE = 4;
         private const int NKIBBLES = 12;
 
@@ -23,11 +23,11 @@ namespace PacMan
                                 "kwwwkwkkkwwkkkwkwwwk" +
                                 "kkkkkwwwkwwkwwwkkkkk" +
                                 "wwwwkwkkkkkkkkwkwwww" +
-                                "wwwwkwkwwkkwwkwkwwww" +
-                                "kkkkkkkwkkkkwkkkkkkk" +
-                                "wwwwkwkwkkkkwkwkwwww" +
+                                "wwwwkwkwwbbwwkwkwwww" +
+                                "kkkkkkkwbbbbwkkkkkkk" +
+                                "wwwwkwkwbbbbwkwkwwww" +
                                 "wwwwkwkwwwwwwkwkwwww" +
-                                "kkkkkwkkkkkkkkwkkkkk" +
+                                "kkkkkwkkkpkkkkwkkkkk" +
                                 "kwwwkwkwwwwwwkwkwwwk" +
                                 "kkwkkkkkkwwkkkkkkwkk" +
                                 "wkwkwwwwkwwkwwwwkwkw" +
@@ -42,16 +42,19 @@ namespace PacMan
         private Bitmap wall;
         private Bitmap kibble;
         private Bitmap blank;
+        private Bitmap pacMan;
 
         //constructor
         public Maze()
             : base()
         {
+            
             //initialise fields
             currentMap = STARTMAP;
             wall = Properties.Resources.wall;
             kibble = Properties.Resources.kibble;
             blank = Properties.Resources.blank;
+            pacMan = Properties.Resources.pacMan;
 
             nKibbles = NKIBBLES;
 
@@ -111,11 +114,16 @@ namespace PacMan
                     case "b":
                         Rows[nRow].Cells[nColumn].Value = blank;
                         break;
+                    case "p":
+                        Rows[nRow].Cells[nColumn].Value = pacMan;
+                        break;
                     default:
                         MessageBox.Show("Unidentified value in string");
                         break;
                 }
             }
         }
+
+
     }
 }
