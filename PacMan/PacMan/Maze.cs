@@ -10,23 +10,31 @@ namespace PacMan
 {
     public class Maze : DataGridView
     {
-        private const int NROWSCOLUMNS = 12;                          // Number of cells in each row and column
+        private const int NROWSCOLUMNS = 20;                          // Number of cells in each row and column
         private const int CELLSIZE = 27;
         private const int SPACESIZE = 4;
         private const int NKIBBLES = 12;
 
-        private const string STARTMAP = "wwwwwwwwwwww" +
-                                "wkkkkwwkkkkw" +
-                                "wkwbkwwkwbkw" +
-                                "wkbwkwwkbwkw" +
-                                "wkkkkwwkkkkw" +
-                                "wwwwwwwwwwww" +
-                                "wwwwwwwwwwww" +
-                                "wkkkkwwkkkkw" +
-                                "wkwbkwwkwbkw" +
-                                "wkbwkwwkbwkw" +
-                                "wkkkkwwkkkkw" +
-                                "wwwwwwwwwwww";
+        private const string STARTMAP = "kkkkkkkkkwwkkkkkkkkk" +
+                                "kwwkwwwwkwwkwwwwkwwk" +
+                                "kwwkwwwwkwwkwwwwkwwk" +
+                                "kkkkkkkkkkkkkkkkkkkk" +
+                                "kwwwkwkwwwwwwkwkwwwk" +
+                                "kwwwkwkkkwwkkkwkwwwk" +
+                                "kkkkkwwwkwwkwwwkkkkk" +
+                                "wwwwkwkkkkkkkkwkwwww" +
+                                "wwwwkwkwwkkwwkwkwwww" +
+                                "kkkkkkkwkkkkwkkkkkkk" +
+                                "wwwwkwkwkkkkwkwkwwww" +
+                                "wwwwkwkwwwwwwkwkwwww" +
+                                "kkkkkwkkkkkkkkwkkkkk" +
+                                "kwwwkwkwwwwwwkwkwwwk" +
+                                "kkwkkkkkkwwkkkkkkwkk" +
+                                "wkwkwwwwkwwkwwwwkwkw" +
+                                "wkwkkkkkkkkkkkkkkwkw" +
+                                "kkkkwwkwwwwwwkwwkkkk" +
+                                "kwwwwwkkkwwkkkwwwwwk" +
+                                "kkkkkkkwkkkkwkkkkkkk";
 
         //fields
         private string currentMap;
