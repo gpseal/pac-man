@@ -17,6 +17,8 @@ namespace Pacman
 
         //declare the Maze object so it can be used throughout the form
         private Maze maze;
+        private Random random;
+        private Controller controller;
 
         public Form1()
         {
@@ -27,13 +29,19 @@ namespace Pacman
             Left = 0;
             Height = FORMHEIGHT;
             Width = FORMWIDTH;
+            KeyPreview = true;
+
+            random = new Random();
 
             // create an instance of a Maze:
             maze = new Maze();
-            SetUpDataGridView();// settings for maze grid
+            //SetUpDataGridView();// settings for maze grid
 
             // important, need to add the maze object to the list of controls on the form
             Controls.Add(maze);
+
+            controller = new Controller(maze, random);
+            controller.StartNewGame();
 
             // remember the Timer Enabled Property is set to false as a default
             timer1.Enabled = true;
@@ -41,14 +49,13 @@ namespace Pacman
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            maze.Draw();
+            controller.PlayGame();
         }
 
-        private void SetUpDataGridView()// settings for maze grid https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datagridview.gridcolor?view=windowsdesktop-5.0
-        {
-            this.Controls.Add(maze);
-            maze.GridColor = Color.Black;
-            
-        }
+        //private void SetUpDataGridView()// settings for maze grid https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datagridview.gridcolor?view=windowsdesktop-5.0
+        //{
+        //    //this.Controls.Add(maze);
+        //    //maze.CellBorderStyle = DataGridViewCellBorderStyle.None;
+        //}
     }
 }

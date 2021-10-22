@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PacMan.Creature" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Creatures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.PacMan" Collapsed="true">
+    <Position X="2" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAgAAAACAIAAAAAAAAAABAAAAAQAAAAA=</HashCode>
+      <FileName>PacMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.Ghoul1" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAEAAgAAAACQIAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Ghoul1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pacman.Form1" Collapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAACAAAIEAAACQAAACAAAAIAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.Maze" Collapsed="true">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAhAAAACAAgBAAAAQAABAAAAAAAQAAAAEAAAhAAA=</HashCode>
+      <FileName>Maze.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.Controller" Collapsed="true">
+    <Position X="6.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAQAAgAAABAAAAAAAAACAAAAIAAABAEQAgAAA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -27,7 +27,7 @@ namespace PacMan
                                 "kkkkkkkwbbbbwkkkkkkk" +
                                 "wwwwkwkwbbbbwkwkwwww" +
                                 "wwwwkwkwwwwwwkwkwwww" +
-                                "kkkkkwkkkpkkkkwkkkkk" +
+                                "kkkkkwkkkkkkkkwkkkkk" +
                                 "kwwwkwkwwwwwwkwkwwwk" +
                                 "kkwkkkkkkwwkkkkkkwkk" +
                                 "wkwkwwwwkwwkwwwwkwkw" +
@@ -42,19 +42,19 @@ namespace PacMan
         private Bitmap wall;
         private Bitmap kibble;
         private Bitmap blank;
-        private Bitmap pacMan;
 
         //constructor
         public Maze()
             : base()
         {
-            
+
+            CellBorderStyle = DataGridViewCellBorderStyle.None;
             //initialise fields
+
             currentMap = STARTMAP;
             wall = Properties.Resources.wall;
             kibble = Properties.Resources.kibble;
             blank = Properties.Resources.blank;
-            pacMan = Properties.Resources.pacMan;
 
             nKibbles = NKIBBLES;
 
@@ -97,11 +97,15 @@ namespace PacMan
         public void Draw()
         {
             int totalCells = NROWSCOLUMNS * NROWSCOLUMNS;
-
+            int count = 0;
             for (int i = 0; i < totalCells; i++)
             {
+                
+                count++;
                 int nRow = i / NROWSCOLUMNS;
                 int nColumn = i % NROWSCOLUMNS;
+
+                //kibble = (Bitmap)Properties.Resources.ResourceManager.GetObject("kibble_" + (count).ToString());
 
                 switch (currentMap.Substring(i, 1)) //i = start position, 1 is how many after (0 based)
                 {
@@ -110,17 +114,18 @@ namespace PacMan
                         break;
                     case "k":
                         Rows[nRow].Cells[nColumn].Value = kibble;
+                        
                         break;
                     case "b":
                         Rows[nRow].Cells[nColumn].Value = blank;
-                        break;
-                    case "p":
-                        Rows[nRow].Cells[nColumn].Value = pacMan;
                         break;
                     default:
                         MessageBox.Show("Unidentified value in string");
                         break;
                 }
+
+                
+
             }
         }
 
