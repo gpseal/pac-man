@@ -10,34 +10,36 @@ namespace PacMan
 {
     public class Maze : DataGridView
     {
-        private const int NROWSCOLUMNS = 20;                          // Number of cells in each row and column
+        private const int NROWSCOLUMNS = 22;                          // Number of cells in each row and column
         private const int CELLSIZE = 37;
         private const int SPACESIZE = 4;
         private const int NKIBBLES = 12;
 
-        private const string STARTMAP = "kkkkkkkkkwwkkkkkkkkk" +
-                                "kwwkwwwwkwwkwwwwkwwk" +
-                                "kwwkwwwwkwwkwwwwkwwk" +
-                                "kkkkkkkkkkkkkkkkkkkk" +
-                                "kwwwkwkwwwwwwkwkwwwk" +
-                                "kwwwkwkkkwwkkkwkwwwk" +
-                                "kkkkkwwwkwwkwwwkkkkk" +
-                                "wwwwkwkkkkkkkkwkwwww" +
-                                "wwwwkwkwwbbwwkwkwwww" +
-                                "kkkkkkkwbbbbwkkkkkkk" +
-                                "wwwwkwkwbbbbwkwkwwww" +
-                                "wwwwkwkwwwwwwkwkwwww" +
-                                "kkkkkwkkkkkkkkwkkkkk" +
-                                "kwwwkwkwwwwwwkwkwwwk" +
-                                "kkwkkkkkkwwkkkkkkwkk" +
-                                "wkwkwwwwkwwkwwwwkwkw" +
-                                "wkwkkkkkkkkkkkkkkwkw" +
-                                "kkkkwwkwwwwwwkwwkkkk" +
-                                "kwwwwwkkkwwkkkwwwwwk" +
-                                "kkkkkkkwkkkkwkkkkkkk";
+        private const string STARTMAP = "wwwwwwwwwwwwwwwwwwwwww" +
+                                "wkkkkkkkkkwwkkkkkkkkkw" +
+                                "wkwwkwwwwkwwkwwwwkwwkw" +
+                                "wkwwkwwwwkwwkwwwwkwwkw" +
+                                "wkkkkkkkkkkkkkkkkkkkkw" +
+                                "wkwwwkwkwwwwwwkwkwwwkw" +
+                                "wkwwwkwkkkwwkkkwkwwwkw" +
+                                "wkkkkkwwwkwwkwwwkkkkkw" +
+                                "wwwwwkwkkkkkkkkwkwwwww" +
+                                "wwwwwkwkwbbbbwkwkwwwww" +
+                                "kkkkkkkkwbbbbwkkkkkkkk" +
+                                "wwwwwkwkwbbbbwkwkwwwww" +
+                                "wwwwwkwkwwwwwwkwkwwwww" +
+                                "wkkkkkwkkkkkkkkwkkkkkw" +
+                                "wkwwwkwkwwwwwwkwkwwwkw" +
+                                "wkkwkkkkkkwwkkkkkkwkkw" +
+                                "wwkwkwwwwkwwkwwwwkwkww" +
+                                "wwkwkkkkkkkkkkkkkkwkww" +
+                                "wkkkkwwkwwwwwwkwwkkkkw" +
+                                "wkwwwwwkkkwwkkkwwwwwkw" +
+                                "wkkkkkkkwkkkkwkkkkkkkw" +
+                                "wwwwwwwwwwwwwwwwwwwwww";
 
         //fields
-        private string currentMap;
+        private char[] currentMap;
         private int nKibbles;
         private Bitmap wall;
         private Bitmap kibble;
@@ -51,7 +53,7 @@ namespace PacMan
             CellBorderStyle = DataGridViewCellBorderStyle.None;
             //initialise fields
 
-            currentMap = STARTMAP;
+            currentMap = STARTMAP.ToCharArray();
             wall = Properties.Resources.wall;
             kibble = Properties.Resources.kibble;
             blank = Properties.Resources.blank;
@@ -59,8 +61,8 @@ namespace PacMan
             nKibbles = NKIBBLES;
 
             // set position of maze on the Form
-            Top = 0;
-            Left = 0;
+            Top = -30;
+            Left = -30;
 
             // setup the columns to display images. We want to display images, so we set 5 columns worth of Image columns
             for (int x = 0; x < NROWSCOLUMNS; x++)
@@ -93,6 +95,8 @@ namespace PacMan
             AllowUserToResizeRows = false;
         }
 
+        
+
         //to draw the maze, the string character is used to load the corresponding image into the DataGridView cell
         public void Draw()
         {
@@ -101,22 +105,20 @@ namespace PacMan
             for (int i = 0; i < totalCells; i++)
             {
                 
-                count++;
+                //count++;
                 int nRow = i / NROWSCOLUMNS;
                 int nColumn = i % NROWSCOLUMNS;
 
-                //kibble = (Bitmap)Properties.Resources.ResourceManager.GetObject("kibble_" + (count).ToString());
 
-                switch (currentMap.Substring(i, 1)) //i = start position, 1 is how many after (0 based)
+                switch (currentMap[i]) //i = start position, 1 is how many after (0 based)
                 {
-                    case "w":
+                    case 'w':
                         Rows[nRow].Cells[nColumn].Value = wall;
                         break;
-                    case "k":
+                    case 'k':
                         Rows[nRow].Cells[nColumn].Value = kibble;
-                        
                         break;
-                    case "b":
+                    case 'b':
                         Rows[nRow].Cells[nColumn].Value = blank;
                         break;
                     default:
@@ -129,6 +131,8 @@ namespace PacMan
             }
         }
 
-
+        //public string CurrentMap { get => currentMap; set => currentMap = value; }
+        public Bitmap Kibble { get => kibble; set => kibble = value; }
+        public char[] CurrentMap1 { get => currentMap; set => currentMap = value; }
     }
 }

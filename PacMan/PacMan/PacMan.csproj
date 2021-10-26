@@ -49,13 +49,14 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Creatures.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ghoul1.cs" />
+    <Compile Include="Ghoul.cs" />
     <Compile Include="Maze.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1327,6 +1328,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ghoul0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulB0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulB1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulC0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulC1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulD0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulD1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan11.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

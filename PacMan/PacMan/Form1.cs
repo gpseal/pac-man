@@ -12,8 +12,8 @@ namespace Pacman
 {
     public partial class Form1 : Form
     {
-        private const int FORMHEIGHT = 780;
-        private const int FORMWIDTH = 758;
+        private const int FORMHEIGHT = 795;
+        private const int FORMWIDTH = 775;
 
         //declare the Maze object so it can be used throughout the form
         private Maze maze;
@@ -57,5 +57,32 @@ namespace Pacman
         //    //this.Controls.Add(maze);
         //    //maze.CellBorderStyle = DataGridViewCellBorderStyle.None;
         //}
+
+
+
+        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    controller.SetPacManDirection(Direction.Left);
+                    break;
+
+                case Keys.Right:
+                    controller.SetPacManDirection(Direction.Right);
+                    break;
+
+                case Keys.Up:
+                    controller.SetPacManDirection(Direction.Up);
+                    break;
+
+                case Keys.Down:
+                    controller.SetPacManDirection(Direction.Down);
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

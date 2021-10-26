@@ -22,5 +22,11 @@ namespace PacMan
         }
 
         public abstract void Draw();
+
+
+
+
     }
+
+
 }
