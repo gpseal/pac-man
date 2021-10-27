@@ -26,8 +26,11 @@ namespace PacMan
         private int frameStart;
         private int frameFin;
         private Random random;
+        private int headX;
+        private int headY;
         private int stringPos;
         private bool change;
+
 
         public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position)
             : base(frames, maze)
@@ -39,7 +42,9 @@ namespace PacMan
             //position = new Point(GHOULSTARTX, GHOULSTARTY);
             direction = Direction.Up;
             frame = 0;
-
+            int headX = position.X;
+            int headY = position.Y;
+            stringPos = (headY * CELLS) + headX;
             aniFrame = 0;
             frameStart = 0;
             frameFin = FRAMECOUNT;
@@ -48,6 +53,8 @@ namespace PacMan
 
             change = false;
         }
+
+        
 
         public override void Draw()
         {
@@ -59,10 +66,10 @@ namespace PacMan
             maze.Rows[position.Y].Cells[position.X].Value = frames[frame];
         }
 
-        public void Move()
+        public override void Move()
         {
-            int headX = position.X;
-            int headY = position.Y;
+            headX = position.X;
+            headY = position.Y;
             stringPos = (headY * CELLS) + headX;
             //maze.CurrentMap1[stringPos] = 'b';
 
@@ -245,5 +252,7 @@ namespace PacMan
                 rotate = false;
             }
         }
+
+        public int StringPos { get => stringPos; set => stringPos = value; }
     }
 }

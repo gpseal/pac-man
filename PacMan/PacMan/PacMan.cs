@@ -17,6 +17,8 @@ namespace PacMan
         private const int LEFT = 0;
         private const int UP = 6;
         private const int DOWN = 9;
+        private const int DEAD = 12;
+
 
 
         private int rotation;
@@ -26,6 +28,8 @@ namespace PacMan
         private int frameStart;
         private int frameFin;
         private Direction direction;
+        private int stringPos;
+        private bool dead;
 
         public PacMan(List<Bitmap> frames, Maze maze, Random random)
             :base(frames, maze)
@@ -43,6 +47,8 @@ namespace PacMan
             rotate = false;
 
             rotation = 0;
+
+            dead = false;
         }
 
         public override void Draw()
@@ -55,12 +61,13 @@ namespace PacMan
             maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
         }
 
-        public void Move()
+        public override void Move()
         {
             int headX = position.X;
             int headY = position.Y;
-            int stringPos = (headY * CELLS) + headX;
+            stringPos = (headY * CELLS) + headX;
             maze.CurrentMap1[stringPos] = 'b';
+
 
             switch (direction)
             {
@@ -117,6 +124,14 @@ namespace PacMan
 
             position = new Point(headX, headY);
 
+
+        }
+
+        public void Dead()
+        {
+            frameStart = DEAD;
+            frameFin = DEAD + 12;
+            dead = true;
         }
 
         private void rotateSprite(int frame)
@@ -133,5 +148,6 @@ namespace PacMan
         public Direction Direction { get => direction; set => direction = value; }
         public bool Rotate { get => rotate; set => rotate = value; }
         public Point Position { get => position; set => position = value; }
+        public int StringPos { get => stringPos; set => stringPos = value; }
     }
 }

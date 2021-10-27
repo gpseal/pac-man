@@ -23,7 +23,7 @@ namespace PacMan
 
         public abstract void Draw();
 
-
+        public abstract void Move();
 
 
     }

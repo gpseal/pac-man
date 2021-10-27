@@ -9,15 +9,15 @@ namespace PacMan
 {
     public class Controller
     {
-        private const int PACFRAMECOUNT = 11;
+        private const int PACFRAMECOUNT = 24;
         private const int GHOULFRAMECOUNT = 2;
 
         private Random random;
         private PacMan pacman;
-        private Ghoul ghoul1;
-        private Ghoul ghoul2;
-        private Ghoul ghoul3;
-        private Ghoul ghoul4;
+        //private Ghoul ghoul1;
+        //private Ghoul ghoul2;
+        //private Ghoul ghoul3;
+        //private Ghoul ghoul4;
         private Maze maze;
         private Bitmap frame;
         private List<Bitmap> pacmanFrames;
@@ -25,6 +25,10 @@ namespace PacMan
         private List<Bitmap> ghoul2Frames;
         private List<Bitmap> ghoul3Frames;
         private List<Bitmap> ghoul4Frames;
+        private List<Ghoul> ghouls;
+        private bool dead;
+
+        public bool Dead { get => dead; set => dead = value; }
 
         public Controller(Maze maze, Random random)
         {
@@ -32,9 +36,9 @@ namespace PacMan
             this.random = random;
 
             pacmanFrames = new List<Bitmap>(); //creating list of animation framse for pacman
-            for (int i = 0; i < PACFRAMECOUNT+1; i++)
+            for (int i = 1; i < PACFRAMECOUNT+1; i++)
             {
-                Bitmap frame = (Bitmap)Properties.Resources.ResourceManager.GetObject("pacMan" + i.ToString());
+                Bitmap frame = (Bitmap)Properties.Resources.ResourceManager.GetObject("pacMan_" + i.ToString());
                 pacmanFrames.Add(new Bitmap(frame));
             }
 
@@ -43,6 +47,7 @@ namespace PacMan
             ghoul3Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
             ghoul4Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
 
+            dead = false;
 
             for (int i = 0; i < GHOULFRAMECOUNT; i++)
             {
@@ -63,10 +68,15 @@ namespace PacMan
 
             pacman = new PacMan(pacmanFrames, maze, random);
 
-            ghoul1 = new Ghoul(ghoul1Frames, maze, random, new Point(12, 11));
-            ghoul2 = new Ghoul(ghoul2Frames, maze, random, new Point(11, 11));
-            ghoul3 = new Ghoul(ghoul3Frames, maze, random, new Point(10, 11));
-            ghoul4 = new Ghoul(ghoul4Frames, maze, random, new Point(9, 11));
+            ghouls = new List<Ghoul>();
+            ghouls.Add(new Ghoul(ghoul1Frames, maze, random, new Point(12, 11)));
+            ghouls.Add(new Ghoul(ghoul2Frames, maze, random, new Point(11, 11)));
+            ghouls.Add(new Ghoul(ghoul3Frames, maze, random, new Point(10, 11)));
+            ghouls.Add(new Ghoul(ghoul4Frames, maze, random, new Point(9, 11)));
+
+            //ghoul2 = new Ghoul(ghoul2Frames, maze, random, new Point(11, 11))
+            //ghoul3 = new Ghoul(ghoul3Frames, maze, random, new Point(10, 11))
+            //ghoul4 = new Ghoul(ghoul4Frames, maze, random, new Point(9, 11))
         }
 
         public void StartNewGame()
@@ -78,19 +88,29 @@ namespace PacMan
         public void PlayGame()
         {
 
-            pacman.Move();
-            
             maze.Draw();
+
+
+
+            foreach (Ghoul ghoul in ghouls)
+            {
+                ghoul.Draw();
+                ghoul.Move();
+                if (pacman.StringPos == ghoul.StringPos && dead == false)
+                {
+                    dead = true;
+                    pacman.Dead();
+                }
+            }
+
             
+            if (dead == false)
+            {
+                pacman.Move();
+            }
             pacman.Draw();
-            ghoul1.Move();
-            ghoul1.Draw();
-            ghoul2.Draw();
-            ghoul2.Move();
-            ghoul3.Move();
-            ghoul3.Draw();
-            ghoul4.Move();
-            ghoul4.Draw();
+
+
         }
 
         public void SetPacManDirection(Direction direction)

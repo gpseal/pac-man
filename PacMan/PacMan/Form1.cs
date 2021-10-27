@@ -19,6 +19,7 @@ namespace Pacman
         private Maze maze;
         private Random random;
         private Controller controller;
+        private int deadCount;
 
         public Form1()
         {
@@ -42,14 +43,26 @@ namespace Pacman
 
             controller = new Controller(maze, random);
             controller.StartNewGame();
+            deadCount = 0;
 
             // remember the Timer Enabled Property is set to false as a default
             timer1.Enabled = true;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             controller.PlayGame();
+            if (controller.Dead == true)
+            {
+                deadCount++;
+                if (deadCount == 15)
+                {
+                    timer1.Enabled = !timer1.Enabled;
+                }
+                
+                
+            }
         }
 
         //private void SetUpDataGridView()// settings for maze grid https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datagridview.gridcolor?view=windowsdesktop-5.0

@@ -1371,5 +1371,77 @@
   <ItemGroup>
     <None Include="Resources\pacMan11.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_12.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_13.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_14.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_15.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_16.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_17.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_18.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_19.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_20.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_21.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_23.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacMan_24.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
