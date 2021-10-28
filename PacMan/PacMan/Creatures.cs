@@ -25,6 +25,17 @@ namespace PacMan
 
         public abstract void Move();
 
+        //public bool HitOpponent(Point opponentPosition)
+        //{
+        //    bool hitOpponent = false;
+
+        //    if (positions[0] == frogPosition)
+        //    {
+        //        eatenfrog = true;
+        //    }
+
+        //    return hitOpponent;
+        //}
 
     }
 

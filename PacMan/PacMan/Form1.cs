@@ -53,16 +53,17 @@ namespace Pacman
         private void timer1_Tick(object sender, EventArgs e)
         {
             controller.PlayGame();
-            if (controller.Dead == true)
-            {
-                deadCount++;
-                if (deadCount == 15)
-                {
-                    timer1.Enabled = !timer1.Enabled;
-                }
+
+            //if (controller.Dead == true)
+            //{
+            //    deadCount++;
+            //    if (deadCount == 15)
+            //    {
+            //        timer1.Enabled = !timer1.Enabled;
+            //    }
                 
                 
-            }
+            //}
         }
 
         //private void SetUpDataGridView()// settings for maze grid https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datagridview.gridcolor?view=windowsdesktop-5.0

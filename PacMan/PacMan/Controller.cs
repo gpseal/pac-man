@@ -26,9 +26,7 @@ namespace PacMan
         private List<Bitmap> ghoul3Frames;
         private List<Bitmap> ghoul4Frames;
         private List<Ghoul> ghouls;
-        private bool dead;
 
-        public bool Dead { get => dead; set => dead = value; }
 
         public Controller(Maze maze, Random random)
         {
@@ -47,7 +45,6 @@ namespace PacMan
             ghoul3Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
             ghoul4Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
 
-            dead = false;
 
             for (int i = 0; i < GHOULFRAMECOUNT; i++)
             {
@@ -95,20 +92,37 @@ namespace PacMan
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Draw();
-                ghoul.Move();
-                if (pacman.StringPos == ghoul.StringPos && dead == false)
+
+                if (pacman.HitOpponent(ghoul.Position))
                 {
-                    dead = true;
+                    pacman.Dead1 = true;
+                    pacman.Dead();
+                }
+
+                if (pacman.Dead1 == false)
+                {
+                    ghoul.Move();
+                }
+                
+            }
+
+            pacman.Draw();
+            if (pacman.Dead1 == false)
+            {
+                pacman.Move();
+            }
+
+
+            foreach (Ghoul ghoul in ghouls)
+            {
+                if (pacman.HitOpponent(ghoul.Position))
+                {
+                    pacman.Dead1 = true;
                     pacman.Dead();
                 }
             }
 
-            
-            if (dead == false)
-            {
-                pacman.Move();
-            }
-            pacman.Draw();
+
 
 
         }

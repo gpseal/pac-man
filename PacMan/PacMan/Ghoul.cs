@@ -254,5 +254,6 @@ namespace PacMan
         }
 
         public int StringPos { get => stringPos; set => stringPos = value; }
+        public Point Position { get => position; set => position = value; }
     }
 }

@@ -131,7 +131,7 @@ namespace PacMan
         {
             frameStart = DEAD;
             frameFin = DEAD + 12;
-            dead = true;
+            //dead = true;
         }
 
         private void rotateSprite(int frame)
@@ -145,9 +145,22 @@ namespace PacMan
             }
         }
 
+        public bool HitOpponent(Point opponentPosition)
+        {
+            bool hitOpponent = false;
+
+            if (position == opponentPosition)
+            {
+                hitOpponent = true;
+            }
+
+            return hitOpponent;
+        }
+
         public Direction Direction { get => direction; set => direction = value; }
         public bool Rotate { get => rotate; set => rotate = value; }
         public Point Position { get => position; set => position = value; }
         public int StringPos { get => stringPos; set => stringPos = value; }
+        public bool Dead1 { get => dead; set => dead = value; }
     }
 }
