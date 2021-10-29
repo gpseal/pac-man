@@ -13,7 +13,7 @@ namespace Pacman
     public partial class Form1 : Form
     {
         private const int FORMHEIGHT = 795;
-        private const int FORMWIDTH = 775;
+        private const int FORMWIDTH = 1175;
 
         //declare the Maze object so it can be used throughout the form
         private Maze maze;

@@ -163,6 +163,36 @@ namespace PacMan.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap kibbleCorner {
+            get {
+                object obj = ResourceManager.GetObject("kibbleCorner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kibbleIntersection {
+            get {
+                object obj = ResourceManager.GetObject("kibbleIntersection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kibbleLeft {
+            get {
+                object obj = ResourceManager.GetObject("kibbleLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pacMan_1 {
             get {
                 object obj = ResourceManager.GetObject("pacMan_1", resourceCulture);
@@ -396,6 +426,16 @@ namespace PacMan.Properties {
         internal static System.Drawing.Bitmap pacMan_9 {
             get {
                 object obj = ResourceManager.GetObject("pacMan_9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scoreboard {
+            get {
+                object obj = ResourceManager.GetObject("scoreboard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

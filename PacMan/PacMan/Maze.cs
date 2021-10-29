@@ -16,26 +16,26 @@ namespace PacMan
         private const int NKIBBLES = 12;
 
         private const string STARTMAP = "wwwwwwwwwwwwwwwwwwwwww" +
-                                "wkkkkkkkkkwwkkkkkkkkkw" +
-                                "wkwwkwwwwkwwkwwwwkwwkw" +
-                                "wkwwkwwwwkwwkwwwwkwwkw" +
-                                "wkkkkkkkkkkkkkkkkkkkkw" +
-                                "wkwwwkwkwwwwwwkwkwwwkw" +
-                                "wkwwwkwkkkwwkkkwkwwwkw" +
-                                "wkkkkkwwwkwwkwwwkkkkkw" +
-                                "wwwwwkwkkkkkkkkwkwwwww" +
-                                "wwwwwkwkwbbbbwkwkwwwww" +
-                                "kkkkkkkkwbbbbwkkkkkkkk" +
-                                "wwwwwkwkwbbbbwkwkwwwww" +
-                                "wwwwwkwkwwwwwwkwkwwwww" +
-                                "wkkkkkwkkkkkkkkwkkkkkw" +
-                                "wkwwwkwkwwwwwwkwkwwwkw" +
-                                "wkkwkkkkkkwwkkkkkkwkkw" +
-                                "wwkwkwwwwkwwkwwwwkwkww" +
-                                "wwkwkkkkkkkkkkkkkkwkww" +
-                                "wkkkkwwkwwwwwwkwwkkkkw" +
-                                "wkwwwwwkkkwwkkkwwwwwkw" +
-                                "wkkkkkkkwkkkkwkkkkkkkw" +
+                                "wckkkkkkkkwwckkkkkkkkw" +
+                                "wlwwlwwwwlwwlwwwwlwwlw" +
+                                "wlwwlwwwwlwwlwwwwlwwlw" +
+                                "wlkkikkkkikkikkkkikkiw" +
+                                "wlwwwlwlwwwwwwlwlwwwlw" +
+                                "wlwwwlwlkkwwckiwlwwwlw" +
+                                "wlkkkiwwwlwwlwwwlkkkiw" +
+                                "wwwwwlwckikkikkwlwwwww" +
+                                "wwwwwlwlwbbbbwlwlwwwww" +
+                                "kkkkkikiwbbbbwlkikkkkk" +
+                                "wwwwwlwlwbbbbwlwlwwwww" +
+                                "wwwwwlwlwwwwwwlwlwwwww" +
+                                "wckkkiwlkkkkkkiwlkkkkw" +
+                                "wlwwwlwlwwwwwwlwlwwwlw" +
+                                "wlkwlikikkwwckikikwciw" +
+                                "wwlwlwwwwlwwlwwwwlwlww" +
+                                "wwlwlkkkkikkikkkkiwlww" +
+                                "wcikiwwlwwwwwwlwwlkkkw" +
+                                "wlwwwwwlkkwwckiwwwwwlw" +
+                                "wlkkkkkiwlkkiwlkkkkkiw" +
                                 "wwwwwwwwwwwwwwwwwwwwww";
 
         //fields
@@ -44,6 +44,9 @@ namespace PacMan
         private Bitmap wall;
         private Bitmap kibble;
         private Bitmap blank;
+        private Bitmap kibbleLeft;
+        private Bitmap kibbleCorner;
+        private Bitmap kibbleIntersection;
 
         //constructor
         public Maze()
@@ -57,7 +60,9 @@ namespace PacMan
             wall = Properties.Resources.wall;
             kibble = Properties.Resources.kibble;
             blank = Properties.Resources.blank;
-
+            kibbleLeft = Properties.Resources.kibbleLeft;
+            kibbleCorner = Properties.Resources.kibbleCorner;
+            kibbleIntersection = Properties.Resources.kibbleIntersection;
             nKibbles = NKIBBLES;
 
             // set position of maze on the Form
@@ -100,6 +105,7 @@ namespace PacMan
         //to draw the maze, the string character is used to load the corresponding image into the DataGridView cell
         public void Draw()
         {
+            int wCount = 1;
             int totalCells = NROWSCOLUMNS * NROWSCOLUMNS;
             int count = 0;
             for (int i = 0; i < totalCells; i++)
@@ -114,9 +120,19 @@ namespace PacMan
                 {
                     case 'w':
                         Rows[nRow].Cells[nColumn].Value = wall;
+                        wCount++;
                         break;
                     case 'k':
                         Rows[nRow].Cells[nColumn].Value = kibble;
+                        break;
+                    case 'l':
+                        Rows[nRow].Cells[nColumn].Value = kibbleLeft;
+                        break;
+                    case 'c':
+                        Rows[nRow].Cells[nColumn].Value = kibbleCorner;
+                        break;
+                    case 'i':
+                        Rows[nRow].Cells[nColumn].Value = kibbleIntersection;
                         break;
                     case 'b':
                         Rows[nRow].Cells[nColumn].Value = blank;
