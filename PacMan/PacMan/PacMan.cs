@@ -61,12 +61,27 @@ namespace PacMan
             maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
         }
 
+        public bool EatKibble() //checks to see if pacman has landed on a square with kibble
+        {
+            bool eat = false;
+            if ((maze.CurrentMap1[stringPos] == 'k')||
+                (maze.CurrentMap1[stringPos] == 'l') || 
+                (maze.CurrentMap1[stringPos] == 'i') || 
+                (maze.CurrentMap1[stringPos] == 'c'))
+            {
+                eat = true;
+                maze.CurrentMap1[stringPos] = 'b';
+            }
+            return eat;
+        }
+
         public override void Move()
         {
             int headX = position.X;
             int headY = position.Y;
             stringPos = (headY * CELLS) + headX;
-            maze.CurrentMap1[stringPos] = 'b';
+
+            
 
 
             switch (direction)
@@ -112,7 +127,7 @@ namespace PacMan
 
                     rotateSprite(DOWN); //9 represents start frame of downward animation sequence
 
-                    if (maze.CurrentMap1[stringPos + 22] != 'w')
+                    if (maze.CurrentMap1[stringPos + 22] != 'w'  && maze.CurrentMap1[stringPos + 22] != 'j')
                     {
                         headY++;
                     }
@@ -162,5 +177,6 @@ namespace PacMan
         public Point Position { get => position; set => position = value; }
         public int StringPos { get => stringPos; set => stringPos = value; }
         public bool Dead1 { get => dead; set => dead = value; }
+        public int AniFrame { get => aniFrame; set => aniFrame = value; }
     }
 }

@@ -24,9 +24,9 @@ namespace PacMan
                                 "wlwwwlwlkkwwckiwlwwwlw" +
                                 "wlkkkiwwwlwwlwwwlkkkiw" +
                                 "wwwwwlwckikkikkwlwwwww" +
-                                "wwwwwlwlwbbbbwlwlwwwww" +
-                                "kkkkkikiwbbbbwlkikkkkk" +
-                                "wwwwwlwlwbbbbwlwlwwwww" +
+                                "wwwwwlwlwjjjjwlwlwwwww" +
+                                "pkkkkikiwjjjjwlkikkkkp" +
+                                "wwwwwlwlwjjjjwlwlwwwww" +
                                 "wwwwwlwlwwwwwwlwlwwwww" +
                                 "wckkkiwlkkkkkkiwlkkkkw" +
                                 "wlwwwlwlwwwwwwlwlwwwlw" +
@@ -47,6 +47,7 @@ namespace PacMan
         private Bitmap kibbleLeft;
         private Bitmap kibbleCorner;
         private Bitmap kibbleIntersection;
+        private Bitmap pipe;
 
         //constructor
         public Maze()
@@ -63,6 +64,7 @@ namespace PacMan
             kibbleLeft = Properties.Resources.kibbleLeft;
             kibbleCorner = Properties.Resources.kibbleCorner;
             kibbleIntersection = Properties.Resources.kibbleIntersection;
+            pipe = Properties.Resources.pipe;
             nKibbles = NKIBBLES;
 
             // set position of maze on the Form
@@ -134,7 +136,13 @@ namespace PacMan
                     case 'i':
                         Rows[nRow].Cells[nColumn].Value = kibbleIntersection;
                         break;
+                    case 'p':
+                        Rows[nRow].Cells[nColumn].Value = pipe;
+                        break;
                     case 'b':
+                        Rows[nRow].Cells[nColumn].Value = blank;
+                        break;
+                    case 'j':
                         Rows[nRow].Cells[nColumn].Value = blank;
                         break;
                     default:

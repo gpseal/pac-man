@@ -30,6 +30,7 @@ namespace PacMan
         private int headY;
         private int stringPos;
         private bool change;
+        private int pacManYPos;
 
 
         public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position)
@@ -137,7 +138,7 @@ namespace PacMan
 
                     rotateSprite(DOWN); //9 represents start frame of downward animation sequence
 
-                    if (maze.CurrentMap1[stringPos + 22] != 'w')
+                    if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')
                     {
                         headY++;
                     }
@@ -156,6 +157,26 @@ namespace PacMan
 
             position = new Point(headX, headY);
         }
+
+        public void PacManPosition(int YPos)
+        {
+            pacManYPos = YPos;
+        }
+
+        private void findPacMan()  //check to see if pacman is above or below ghoul
+        {
+            if (position.Y > pacManYPos && maze.CurrentMap1[stringPos - 22] != 'w')
+            {
+                direction = Direction.Up;
+            }
+
+            if (position.Y < pacManYPos && maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos] != 'j')  //forces ghouls to leave jail  at beginning of level
+            {
+                direction = Direction.Down;
+            }
+
+        }
+
 
         private void changeDirection()
         {
@@ -208,6 +229,7 @@ namespace PacMan
         {
 
             int newDirection = random.Next(4);
+            findPacMan(); //ghouls will search for pacman position but only in wall gaps, not in maze corners
 
             switch (newDirection)
             {

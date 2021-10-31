@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PacMan
 {
@@ -26,13 +27,17 @@ namespace PacMan
         private List<Bitmap> ghoul3Frames;
         private List<Bitmap> ghoul4Frames;
         private List<Ghoul> ghouls;
+        private TextBox textBox1;
+        private int score;
 
 
-        public Controller(Maze maze, Random random)
+        public Controller(Maze maze, Random random, TextBox textBox1)
         {
             this.maze = maze;
             this.random = random;
-
+            this.textBox1 = textBox1;
+            score = 0;
+            textBox1.Text = score.ToString();
             pacmanFrames = new List<Bitmap>(); //creating list of animation framse for pacman
             for (int i = 1; i < PACFRAMECOUNT+1; i++)
             {
@@ -78,17 +83,20 @@ namespace PacMan
 
         public void StartNewGame()
         {
-
+            pacman = null;
+            pacman = new PacMan(pacmanFrames, maze, random);
+            foreach (Ghoul ghoul in ghouls)
+            {
+                int pos = 9;
+                ghoul.Position = new Point(pos, 11);
+                pos++;
+            }
 
         }
 
         public void PlayGame()
         {
-
             maze.Draw();
-
-
-
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Draw();
@@ -112,9 +120,16 @@ namespace PacMan
                 pacman.Move();
             }
 
+            if (pacman.EatKibble() == true)
+            {
+                score++;
+                textBox1.Text = score.ToString();
+            }
 
             foreach (Ghoul ghoul in ghouls)
             {
+                ghoul.PacManPosition(pacman.Position.Y);
+
                 if (pacman.HitOpponent(ghoul.Position))
                 {
                     pacman.Dead1 = true;
@@ -122,9 +137,10 @@ namespace PacMan
                 }
             }
 
-
-
-
+            if (pacman.AniFrame == 23)
+            {
+                StartNewGame();
+            }
         }
 
         public void SetPacManDirection(Direction direction)
