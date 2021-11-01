@@ -42,7 +42,7 @@ namespace Pacman
             Controls.Add(maze);
 
             controller = new Controller(maze, random, textBox1);
-            controller.StartNewGame();
+            //controller.StartNewGame();
             deadCount = 0;
 
             // remember the Timer Enabled Property is set to false as a default

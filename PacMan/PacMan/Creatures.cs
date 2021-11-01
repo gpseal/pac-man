@@ -9,21 +9,125 @@ namespace PacMan
 {
     public abstract class Creature
     {
+        protected const int CELLS = 22;
+
         //fields
         protected List<Bitmap> frames;
         protected Maze maze;
+        protected Point position;
+        protected int stringPos;
+        protected Direction direction;
+        protected bool change;
+        //private int DOWN;
+        //private int RIGHT;
+        //private int LEFT;
+        //private int UP;
+        protected int frame;
+        protected bool rotate;
+        protected int aniFrame;
+        protected int frameFin;
+        protected int frameStart;
 
         //constructor
-        public Creature(List<Bitmap> frames, Maze maze)
+        public Creature(List<Bitmap> frames, Maze maze, Point position, Direction direction)
         {
-
+            this.position = position;
             this.frames = frames;
             this.maze = maze;
+            this.direction = direction;
         }
 
         public abstract void Draw();
 
-        public abstract void Move();
+
+        public abstract void rotateSprite();
+
+        public void Move()
+        {
+            int headX = position.X;
+            int headY = position.Y;
+            stringPos = (headY * CELLS) + headX;
+
+            //change = true;
+
+            switch (direction)
+            {
+                case Direction.Right:
+                    //rotateSprite(RIGHT);
+
+                    if (stringPos == 240)
+                    {
+                        headX = headX - 19;
+                    }
+
+                    else if (maze.CurrentMap1[stringPos + 1] != 'w')
+                    {
+                        headX++;
+                    }
+
+                    else
+                    {
+                        change = true;
+                    }
+
+                    break;
+
+                case Direction.Left:
+
+                    //rotateSprite(LEFT);
+
+                    if (maze.CurrentMap1[stringPos - 1] != 'w')
+                    {
+                        headX--;
+                    }
+
+                    else
+                    {
+                        change = true;
+                    }
+
+                    break;
+
+                case Direction.Up:
+
+                    //rotateSprite(UP);
+
+                    if (maze.CurrentMap1[stringPos - 22] != 'w')
+                    {
+                        headY--;
+                    }
+
+                    else
+                    {
+                        change = true;
+                    }
+
+                    break;
+
+                case Direction.Down:
+
+                    //rotateSprite(DOWN); //9 represents start frame of downward animation sequence
+
+                    if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')
+                    {
+                        headY++;
+                    }
+
+                    else
+                    {
+                        change = true;
+                    }
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            position = new Point(headX, headY);
+        }
+
+
 
         //public bool HitOpponent(Point opponentPosition)
         //{

@@ -18,9 +18,9 @@ namespace PacMan
         private const int DOWN = 6;
 
         private const int CELLS = 22;
-        private Point position;
+        //private Point position;
         private int frame;
-        private Direction direction;
+        //private Direction direction;
         private bool rotate;
         private int aniFrame;
         private int frameStart;
@@ -32,30 +32,25 @@ namespace PacMan
         private bool change;
         private int pacManYPos;
 
-
-        public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position)
-            : base(frames, maze)
+        public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction)
+            : base(frames, maze, position, direction)
         {
             this.frames = frames;
             this.maze = maze;
             this.position = position;
             this.random = random;
             //position = new Point(GHOULSTARTX, GHOULSTARTY);
-            direction = Direction.Up;
+            //direction = Direction.Up;
+            this.direction = direction;
             frame = 0;
-            int headX = position.X;
-            int headY = position.Y;
-            stringPos = (headY * CELLS) + headX;
+            stringPos = (position.Y * CELLS) + position.X;
             aniFrame = 0;
             frameStart = 0;
-            frameFin = FRAMECOUNT;
-
             rotate = false;
-
             change = false;
         }
 
-        
+
 
         public override void Draw()
         {
@@ -67,96 +62,92 @@ namespace PacMan
             maze.Rows[position.Y].Cells[position.X].Value = frames[frame];
         }
 
-        public override void Move()
-        {
-            headX = position.X;
-            headY = position.Y;
-            stringPos = (headY * CELLS) + headX;
-            //maze.CurrentMap1[stringPos] = 'b';
+        //public void Move()
+        //{
+        //    //int headX = position.X;
+        //    //int headY = position.Y;
+        //    //stringPos = (headY * CELLS) + headX;
 
-            change = true;
-            checkForGaps();
+        //    ////change = true;
 
-            switch (direction)
-            {
-                case Direction.Right:
-                    rotateSprite(RIGHT);
+        //    //switch (direction)
+        //    //{
+        //    //    case Direction.Right:
+        //    //        rotateSprite(RIGHT);
 
-                    if (stringPos == 240)
-                    {
-                        headX = headX - 19;
-                    }
+        //    //        if (stringPos == 240)
+        //    //        {
+        //    //            headX = headX - 19;
+        //    //        }
 
-                    else if (maze.CurrentMap1[stringPos + 1] != 'w')
-                    {
-                        headX++;
-                    }
+        //    //        else if (maze.CurrentMap1[stringPos + 1] != 'w')
+        //    //        {
+        //    //            headX++;
+        //    //        }
 
-                    else
-                    {
-                        change = true;
-                        changeDirection();
-                    }
+        //    //        else
+        //    //        {
+        //    //            change = true;
+        //    //        }
 
-                    break;
+        //    //        break;
 
-                case Direction.Left:
+        //    //    case Direction.Left:
 
-                    rotateSprite(LEFT);
+        //    //        rotateSprite(LEFT);
 
-                    if (maze.CurrentMap1[stringPos - 1] != 'w')
-                    {
-                        headX--;
-                    }
+        //    //        if (maze.CurrentMap1[stringPos - 1] != 'w')
+        //    //        {
+        //    //            headX--;
+        //    //        }
 
-                    else
-                    {
-                        change = true;
-                        changeDirection();
-                    }
+        //    //        else
+        //    //        {
+        //    //            change = true;
+        //    //        }
 
-                    break;
+        //    //        break;
 
-                case Direction.Up:
+        //    //    case Direction.Up:
 
-                    rotateSprite(UP);
+        //    //        rotateSprite(UP);
 
-                    if (maze.CurrentMap1[stringPos - 22] != 'w')
-                    {
-                        headY--;
-                    }
+        //    //        if (maze.CurrentMap1[stringPos - 22] != 'w')
+        //    //        {
+        //    //            headY--;
+        //    //        }
 
-                    else
-                    {
-                        change = true;
-                        changeDirection();
-                    }
+        //    //        else
+        //    //        {
+        //    //            change = true;
+        //    //        }
 
-                    break;
+        //    //        break;
 
-                case Direction.Down:
+        //    //    case Direction.Down:
 
-                    rotateSprite(DOWN); //9 represents start frame of downward animation sequence
+        //    //        rotateSprite(DOWN); //9 represents start frame of downward animation sequence
 
-                    if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')
-                    {
-                        headY++;
-                    }
+        //    //        if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')
+        //    //        {
+        //    //            headY++;
+        //    //        }
 
-                    else
-                    {
-                        change = true;
-                        changeDirection();
-                    }
+        //    //        else
+        //    //        {
+        //    //            change = true;
+        //    //        }
 
-                    break;
+        //    //        break;
 
-                default:
-                    break;
-            }
+        //    //    default:
+        //    //        break;
+        //    //}
 
-            position = new Point(headX, headY);
-        }
+        //    //position = new Point(headX, headY);
+        //    changeDirection();
+        //    checkForGaps();
+        //}
 
         public void PacManPosition(int YPos)
         {
@@ -177,55 +168,88 @@ namespace PacMan
 
         }
 
-
-        private void changeDirection()
+        public void ChangeDirection()
         {
-            do
+            int headX = position.X;
+            int headY = position.Y;
+            stringPos = (headY * CELLS) + headX;
+
+            switch (direction)
+            {
+                case Direction.Right:
+                    if (maze.CurrentMap1[stringPos + 1] == 'w')
+                    {
+                    change = true;
+                    }
+                    break;
+
+                case Direction.Left:
+                    if (maze.CurrentMap1[stringPos - 1] == 'w')
+                    {
+                    change = true;
+                    }
+                    break;
+
+                case Direction.Up:
+                    if (maze.CurrentMap1[stringPos - 22] == 'w')
+                    {
+                    change = true;
+                    }
+                    break;
+
+                case Direction.Down:
+                    if (maze.CurrentMap1[stringPos + 22] == 'w' || maze.CurrentMap1[stringPos + 22] == 'j')
+                    {
+                    change = true;
+                    }
+                    break;
+            }
+
+            if (change == true)
             {
                 int newDirection = random.Next(4);
 
                 switch (newDirection)
                 {
                     case 0:
-                    if (maze.CurrentMap1[stringPos + 1] != 'w')
-                    {
+                        //if (maze.CurrentMap1[stringPos + 1] != 'w')
+                        //{
                         change = false;
                         direction = Direction.Right;
-                    }
-                    break;
+                        //}
+                        break;
 
                     case 1:
-                        if (maze.CurrentMap1[stringPos - 1] != 'w')
-                        {
-                            change = false;
-                            direction = Direction.Left;
-                        }
+                        //if (maze.CurrentMap1[stringPos - 1] != 'w')
+                        //{
+                        change = false;
+                        direction = Direction.Left;
+                        //}
                         break;
 
                     case 2:
-                        if (maze.CurrentMap1[stringPos - 22] != 'w')
-                        {
-                            change = false;
-                            direction = Direction.Up;
-                        }
+                        //if (maze.CurrentMap1[stringPos - 22] != 'w')
+                        //{
+                        change = false;
+                        direction = Direction.Up;
+                        //}
                         break;
 
                     case 3:
-                        if (maze.CurrentMap1[stringPos + 22] != 'w')
-                        {
-                            change = false;
-                            direction = Direction.Down;
-                        }
+                        //if (maze.CurrentMap1[stringPos + 22] != 'w')
+                        //{
+                        change = false;
+                        direction = Direction.Down;
+                        //}
                         break;
                 }
-
-
-            } while (change == true);
+            }
+            
             
             
         }
 
-        private void checkForGaps()  //enables ghosts to pick routes that are not in corners of maze
+        public void CheckForGaps()  //enables ghosts to pick routes that are not in corners of maze
         {
 
             int newDirection = random.Next(4);
@@ -264,7 +288,7 @@ namespace PacMan
 
         }
 
-        private void rotateSprite(int frame)
+        public override void rotateSprite()
         {
             if (rotate == true)
             {

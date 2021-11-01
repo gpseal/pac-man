@@ -19,26 +19,24 @@ namespace PacMan
         private const int DOWN = 9;
         private const int DEAD = 12;
 
-
-
         private int rotation;
         private bool rotate;
-        private Point position;
+        //private Point position;
         private int aniFrame;
         private int frameStart;
         private int frameFin;
-        private Direction direction;
-        private int stringPos;
+        //private Direction direction;
+        //private int stringPos;
         private bool dead;
 
-        public PacMan(List<Bitmap> frames, Maze maze, Random random)
-            :base(frames, maze)
+        public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction)
+            :base(frames, maze, position, direction)
         {
             this.frames = frames;
             this.maze = maze;
             direction = Direction.Left;
-
-            position = new Point(PACSTARTX, PACSTARTY);
+            this.position = position;
+            //position = new Point(PACSTARTX, PACSTARTY);
 
             aniFrame = 0;
             frameStart = 0;
@@ -75,72 +73,64 @@ namespace PacMan
             return eat;
         }
 
-        public override void Move()
-        {
-            int headX = position.X;
-            int headY = position.Y;
-            stringPos = (headY * CELLS) + headX;
+        //public void Move()
+        //{
+            //int headX = position.X;
+            //int headY = position.Y;
+            //stringPos = (headY * CELLS) + headX;
 
-            
+            //switch (direction)
+            //{
+            //    case Direction.Right:
+            //        rotateSprite(RIGHT);
 
+            //        if (stringPos == 240)
+            //        {
+            //            headX = headX-19;
+            //        }
 
-            switch (direction)
-            {
-                case Direction.Right:
-                    rotateSprite(RIGHT);
+            //        else if (maze.CurrentMap1[stringPos + 1] != 'w')
+            //        {
+            //            headX++;
+            //        }
+            //        break;
 
-                    if (stringPos == 240)
-                    {
-                        headX = headX-19;
-                    }
+            //    case Direction.Left:
 
-                    else if (maze.CurrentMap1[stringPos + 1] != 'w')
-                    {
-                        headX++;
-                    }
-                    break;
+            //        rotateSprite(LEFT);
 
-                case Direction.Left:
+            //        if (maze.CurrentMap1[stringPos-1] != 'w')
+            //        {
+            //            headX--;
+            //        }
+            //        break;
 
-                    rotateSprite(LEFT);
+            //    case Direction.Up:
 
-                    if (maze.CurrentMap1[stringPos-1] != 'w')
-                    {
-                        headX--;
-                    }
+            //        rotateSprite(UP);
 
-                    
-                    break;
+            //        if (maze.CurrentMap1[stringPos - 22] != 'w')
+            //        {
+            //            headY--;
+            //        }
+            //        break;
 
-                case Direction.Up:
+            //    case Direction.Down:
 
-                    rotateSprite(UP);
+            //        rotateSprite(DOWN); //9 represents start frame of downward animation sequence
 
-                    if (maze.CurrentMap1[stringPos - 22] != 'w')
-                    {
-                        headY--;
-                    }
-                        
-                    break;
+            //        if (maze.CurrentMap1[stringPos + 22] != 'w'  && maze.CurrentMap1[stringPos + 22] != 'j')
+            //        {
+            //            headY++;
+            //        }
+            //        break;
 
-                case Direction.Down:
+            //    default:
+            //        break;
+            //}
 
-                    rotateSprite(DOWN); //9 represents start frame of downward animation sequence
-
-                    if (maze.CurrentMap1[stringPos + 22] != 'w'  && maze.CurrentMap1[stringPos + 22] != 'j')
-                    {
-                        headY++;
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-
-            position = new Point(headX, headY);
-
-
-        }
+            //position = new Point(headX, headY);
+        //}
 
         public void Dead()
         {
@@ -149,15 +139,38 @@ namespace PacMan
             //dead = true;
         }
 
-        private void rotateSprite(int frame)
+        public override void rotateSprite()
         {
-            if (rotate == true)
+            switch (direction)
             {
+                case Direction.Right:
+                    frame = RIGHT;
+                    break;
+
+                case Direction.Left:
+                    frame = LEFT;
+                    break;
+
+                case Direction.Up:
+                    frame = UP;
+
+                    break;
+
+                case Direction.Down:
+                    frame = DOWN;
+                    break;
+
+                default:
+                    break;
+            }
+
+            //        if (rotate == true)
+            //{
                 aniFrame = frame;
                 frameStart = frame;
                 frameFin = frame + FRAMECOUNT;
                 rotate = false;
-            }
+            //}
         }
 
         public bool HitOpponent(Point opponentPosition)
