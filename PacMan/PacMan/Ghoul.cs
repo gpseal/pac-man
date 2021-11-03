@@ -31,6 +31,9 @@ namespace PacMan
         private int stringPos;
         private bool change;
         private int pacManYPos;
+        private bool scared;
+        private bool jail;
+        private Point startPosition;
 
         public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
             : base(frames, maze, position, direction, frameFin, aniframe, frameStart)
@@ -41,6 +44,7 @@ namespace PacMan
             this.frames = frames;
             this.maze = maze;
             this.position = position;
+            startPosition = position;
             this.random = random;
             //position = new Point(GHOULSTARTX, GHOULSTARTY);
             //direction = Direction.Up;
@@ -51,6 +55,8 @@ namespace PacMan
             //frameStart = 0;
             rotate = false;
             change = false;
+            scared = false;
+            jail = false;
 
             //frameFin = 2;
         }
@@ -78,6 +84,34 @@ namespace PacMan
                 rotate = false;
             }
         }
+
+        public void Dead()
+        {
+            aniFrame = 0;
+            frameStart = 0;
+            frameFin = frameStart + FRAMECOUNT;
+            position = startPosition;
+            scared = false;
+            jail = true;
+        }
+        
+        public void ScaredGhost()
+        {
+            if (scared == true)
+            {
+                aniFrame = 2;
+                frameStart = 2;
+                frameFin = frameStart + FRAMECOUNT;
+            }
+
+            else
+            {
+                aniFrame = 0;
+                frameStart = 0;
+                frameFin = frameStart + FRAMECOUNT;
+            }
+        }
+
 
         //public void Move()
         //{
@@ -309,5 +343,7 @@ namespace PacMan
 
         public int StringPos { get => stringPos; set => stringPos = value; }
         public Point Position { get => position; set => position = value; }
+        public bool Scared { get => scared; set => scared = value; }
+        public bool Jail { get => jail; set => jail = value; }
     }
 }

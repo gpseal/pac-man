@@ -1041,5 +1041,32 @@
   <ItemGroup>
     <None Include="Resources\pipe.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulB2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulB3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulC2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulC3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulD2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoulD3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoul2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghoul3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

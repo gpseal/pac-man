@@ -18,6 +18,7 @@ namespace PacMan
         private const int UP = 6;
         private const int DOWN = 9;
         private const int DEAD = 12;
+        private bool powerUp;
 
         private int rotation;
         private bool rotate;
@@ -49,6 +50,7 @@ namespace PacMan
             rotation = 0;
 
             dead = false;
+            powerUp = false;
         }
 
         //public override void Draw()
@@ -105,63 +107,74 @@ namespace PacMan
             return eat;
         }
 
+        public bool PowerUp() //checks to see if pacman has landed on a square with kibble
+        {
+            bool powerUp = false;
+            if (maze.CurrentMap1[stringPos] == 'P')
+            { 
+                powerUp = true;
+                maze.CurrentMap1[stringPos] = 'b';
+            }
+            return powerUp;
+        }
+
         //public void Move()
         //{
-            //int headX = position.X;
-            //int headY = position.Y;
-            //stringPos = (headY * CELLS) + headX;
+        //int headX = position.X;
+        //int headY = position.Y;
+        //stringPos = (headY * CELLS) + headX;
 
-            //switch (direction)
-            //{
-            //    case Direction.Right:
-            //        rotateSprite(RIGHT);
+        //switch (direction)
+        //{
+        //    case Direction.Right:
+        //        rotateSprite(RIGHT);
 
-            //        if (stringPos == 240)
-            //        {
-            //            headX = headX-19;
-            //        }
+        //        if (stringPos == 240)
+        //        {
+        //            headX = headX-19;
+        //        }
 
-            //        else if (maze.CurrentMap1[stringPos + 1] != 'w')
-            //        {
-            //            headX++;
-            //        }
-            //        break;
+        //        else if (maze.CurrentMap1[stringPos + 1] != 'w')
+        //        {
+        //            headX++;
+        //        }
+        //        break;
 
-            //    case Direction.Left:
+        //    case Direction.Left:
 
-            //        rotateSprite(LEFT);
+        //        rotateSprite(LEFT);
 
-            //        if (maze.CurrentMap1[stringPos-1] != 'w')
-            //        {
-            //            headX--;
-            //        }
-            //        break;
+        //        if (maze.CurrentMap1[stringPos-1] != 'w')
+        //        {
+        //            headX--;
+        //        }
+        //        break;
 
-            //    case Direction.Up:
+        //    case Direction.Up:
 
-            //        rotateSprite(UP);
+        //        rotateSprite(UP);
 
-            //        if (maze.CurrentMap1[stringPos - 22] != 'w')
-            //        {
-            //            headY--;
-            //        }
-            //        break;
+        //        if (maze.CurrentMap1[stringPos - 22] != 'w')
+        //        {
+        //            headY--;
+        //        }
+        //        break;
 
-            //    case Direction.Down:
+        //    case Direction.Down:
 
-            //        rotateSprite(DOWN); //9 represents start frame of downward animation sequence
+        //        rotateSprite(DOWN); //9 represents start frame of downward animation sequence
 
-            //        if (maze.CurrentMap1[stringPos + 22] != 'w'  && maze.CurrentMap1[stringPos + 22] != 'j')
-            //        {
-            //            headY++;
-            //        }
-            //        break;
+        //        if (maze.CurrentMap1[stringPos + 22] != 'w'  && maze.CurrentMap1[stringPos + 22] != 'j')
+        //        {
+        //            headY++;
+        //        }
+        //        break;
 
-            //    default:
-            //        break;
-            //}
+        //    default:
+        //        break;
+        //}
 
-            //position = new Point(headX, headY);
+        //position = new Point(headX, headY);
         //}
 
         public void Dead()

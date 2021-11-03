@@ -16,7 +16,7 @@ namespace PacMan
         private const int NKIBBLES = 12;
 
         private const string STARTMAP = "wwwwwwwwwwwwwwwwwwwwww" +
-                                "wckkkkkkkkwwckkkkkkkkw" +
+                                "wckPkkkkkkwwckkkkkPkkw" +
                                 "wlwwlwwwwlwwlwwwwlwwlw" +
                                 "wlwwlwwwwlwwlwwwwlwwlw" +
                                 "wlkkikkkkikkikkkkikkiw" +
@@ -35,7 +35,7 @@ namespace PacMan
                                 "wwlwlkkkkikkikkkkiwlww" +
                                 "wcikiwwlwwwwwwlwwlkkkw" +
                                 "wlwwwwwlkkwwckiwwwwwlw" +
-                                "wlkkkkkiwlkkiwlkkkkkiw" +
+                                "wlkkPkkiwlkkiwlkkPkkiw" +
                                 "wwwwwwwwwwwwwwwwwwwwww";
 
         //fields
@@ -48,6 +48,7 @@ namespace PacMan
         private Bitmap kibbleCorner;
         private Bitmap kibbleIntersection;
         private Bitmap pipe;
+        private Bitmap power;
 
         //constructor
         public Maze()
@@ -65,7 +66,9 @@ namespace PacMan
             kibbleCorner = Properties.Resources.kibbleCorner;
             kibbleIntersection = Properties.Resources.kibbleIntersection;
             pipe = Properties.Resources.pipe;
+            power = Properties.Resources.power;
             nKibbles = NKIBBLES;
+
 
             // set position of maze on the Form
             Top = -30;
@@ -144,6 +147,9 @@ namespace PacMan
                         break;
                     case 'j':
                         Rows[nRow].Cells[nColumn].Value = blank;
+                        break;
+                    case 'P':
+                        Rows[nRow].Cells[nColumn].Value = power;
                         break;
                     default:
                         MessageBox.Show("Unidentified value in string");
