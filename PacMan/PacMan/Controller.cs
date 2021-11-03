@@ -69,13 +69,13 @@ namespace PacMan
 
 
 
-            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left);
+            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
 
             ghouls = new List<Ghoul>();
-            ghouls.Add(new Ghoul(ghoul1Frames, maze, random, new Point(12, 11), Direction.Up));
-            ghouls.Add(new Ghoul(ghoul2Frames, maze, random, new Point(11, 11), Direction.Up));
-            ghouls.Add(new Ghoul(ghoul3Frames, maze, random, new Point(10, 11), Direction.Up));
-            ghouls.Add(new Ghoul(ghoul4Frames, maze, random, new Point(9, 11), Direction.Up));
+            ghouls.Add(new Ghoul(ghoul1Frames, maze, random, new Point(12, 11), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul2Frames, maze, random, new Point(11, 11), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul3Frames, maze, random, new Point(10, 11), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul4Frames, maze, random, new Point(9, 11), Direction.Up, 2, 0, 0));
 
             ghoulStart = 9;
             //ghoul2 = new Ghoul(ghoul2Frames, maze, random, new Point(11, 11))
@@ -86,7 +86,7 @@ namespace PacMan
         public void StartNewGame()
         {
             pacman = null;
-            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left);
+            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Position = new Point(ghoulStart, 11);
@@ -101,12 +101,11 @@ namespace PacMan
             maze.Draw();
             foreach (Ghoul ghoul in ghouls)
             {
-
                 ghoul.Draw();
                 ghoul.PacManPosition(pacman.Position.Y);
-                if (pacman.HitOpponent(ghoul.Position))
+                if (pacman.HitOpponent(ghoul.Position) && pacman.Dead1 == false)
                 {
-                    pacman.Dead1 = true;
+                    //pacman.Dead1 = true;
                     pacman.Dead();
                 }
 
@@ -115,6 +114,7 @@ namespace PacMan
                     ghoul.Move();
                     ghoul.ChangeDirection();
                     ghoul.CheckForGaps();
+                    ghoul.PacManPosition(pacman.Position.Y);
                 }
                 
             }
@@ -133,11 +133,9 @@ namespace PacMan
 
             foreach (Ghoul ghoul in ghouls)
             {
-                
-
                 if (pacman.HitOpponent(ghoul.Position))
                 {
-                    pacman.Dead1 = true;
+                    //pacman.Dead1 = true;
                     pacman.Dead();
                 }
             }
@@ -156,6 +154,16 @@ namespace PacMan
         }
 
 
+        public bool pacManDead()
+        {
+            bool pacManDead = false;
 
+            if (pacman.Dead1 == true)
+            {
+                pacManDead = true;
+            }
+
+            return pacManDead;
+        }
     }
 }

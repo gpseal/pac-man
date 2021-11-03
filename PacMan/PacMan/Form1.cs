@@ -76,27 +76,31 @@ namespace Pacman
 
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (controller.pacManDead() == false)
             {
-                case Keys.Left:
-                    controller.SetPacManDirection(Direction.Left);
-                    break;
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        controller.SetPacManDirection(Direction.Left);
+                        break;
 
-                case Keys.Right:
-                    controller.SetPacManDirection(Direction.Right);
-                    break;
+                    case Keys.Right:
+                        controller.SetPacManDirection(Direction.Right);
+                        break;
 
-                case Keys.Up:
-                    controller.SetPacManDirection(Direction.Up);
-                    break;
+                    case Keys.Up:
+                        controller.SetPacManDirection(Direction.Up);
+                        break;
 
-                case Keys.Down:
-                    controller.SetPacManDirection(Direction.Down);
-                    break;
+                    case Keys.Down:
+                        controller.SetPacManDirection(Direction.Down);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
+
         }
     }
 }

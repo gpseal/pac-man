@@ -22,9 +22,9 @@ namespace PacMan
         private int frame;
         //private Direction direction;
         private bool rotate;
-        private int aniFrame;
-        private int frameStart;
-        private int frameFin;
+        //private int aniFrame;
+        //private int frameStart;
+        //private int frameFin;
         private Random random;
         private int headX;
         private int headY;
@@ -32,9 +32,12 @@ namespace PacMan
         private bool change;
         private int pacManYPos;
 
-        public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction)
-            : base(frames, maze, position, direction)
+        public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
+            : base(frames, maze, position, direction, frameFin, aniframe, frameStart)
         {
+            this.aniFrame = aniFrame;
+            this.frameStart = frameStart;
+            this.frameFin = frameFin;
             this.frames = frames;
             this.maze = maze;
             this.position = position;
@@ -44,22 +47,36 @@ namespace PacMan
             this.direction = direction;
             frame = 0;
             stringPos = (position.Y * CELLS) + position.X;
-            aniFrame = 0;
-            frameStart = 0;
+            //aniFrame = 0;
+            //frameStart = 0;
             rotate = false;
             change = false;
+
+            //frameFin = 2;
         }
 
 
 
-        public override void Draw()
+        //public override void Draw()
+        //{
+        //    aniFrame++;
+        //    if (aniFrame == frameFin)
+        //    {
+        //        aniFrame = frameStart;
+        //    }
+        //    maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
+        //}
+
+
+        public override void rotateSprite()
         {
-            frame++;
-            if (frame == FRAMECOUNT)
+            if (rotate == true)
             {
-                frame = 0;
+                aniFrame = frame;
+                frameStart = frame;
+                frameFin = frame + FRAMECOUNT;
+                rotate = false;
             }
-            maze.Rows[position.Y].Cells[position.X].Value = frames[frame];
         }
 
         //public void Move()
@@ -288,16 +305,7 @@ namespace PacMan
 
         }
 
-        public override void rotateSprite()
-        {
-            if (rotate == true)
-            {
-                aniFrame = frame;
-                frameStart = frame;
-                frameFin = frame + FRAMECOUNT;
-                rotate = false;
-            }
-        }
+
 
         public int StringPos { get => stringPos; set => stringPos = value; }
         public Point Position { get => position; set => position = value; }

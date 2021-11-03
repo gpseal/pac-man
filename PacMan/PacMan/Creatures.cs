@@ -28,16 +28,28 @@ namespace PacMan
         protected int frameFin;
         protected int frameStart;
 
+
         //constructor
-        public Creature(List<Bitmap> frames, Maze maze, Point position, Direction direction)
+        public Creature(List<Bitmap> frames, Maze maze, Point position, Direction direction, int frameFin, int aniframe, int frameStart)//do this with aniframe frameFin frameStart
         {
+            this.aniFrame = aniFrame;
+            this.frameStart = frameStart;
+            this.frameFin = frameFin;
             this.position = position;
             this.frames = frames;
             this.maze = maze;
             this.direction = direction;
         }
 
-        public abstract void Draw();
+        public void Draw()
+        {
+            aniFrame++;
+            if (aniFrame == frameFin)
+            {
+                aniFrame = frameStart;
+            }
+        maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
+        }
 
 
         public abstract void rotateSprite();
@@ -76,7 +88,13 @@ namespace PacMan
 
                     //rotateSprite(LEFT);
 
-                    if (maze.CurrentMap1[stringPos - 1] != 'w')
+
+                    if (stringPos == 221)
+                    {
+                        headX = headX + 19;
+                    }
+
+                    else if (maze.CurrentMap1[stringPos - 1] != 'w')
                     {
                         headX--;
                     }

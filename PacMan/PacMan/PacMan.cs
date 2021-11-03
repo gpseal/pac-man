@@ -22,25 +22,27 @@ namespace PacMan
         private int rotation;
         private bool rotate;
         //private Point position;
-        private int aniFrame;
-        private int frameStart;
-        private int frameFin;
+        //private int aniFrame;
+        //private int frameStart;
+        //private int frameFin;
         //private Direction direction;
         //private int stringPos;
         private bool dead;
 
-        public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction)
-            :base(frames, maze, position, direction)
+        public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
+            :base(frames, maze, position, direction, frameFin, aniframe, frameStart)
         {
+            this.aniFrame = aniFrame;
+            this.frameStart = frameStart;
+            this.frameFin = frameFin;
             this.frames = frames;
             this.maze = maze;
             direction = Direction.Left;
             this.position = position;
             //position = new Point(PACSTARTX, PACSTARTY);
 
-            aniFrame = 0;
-            frameStart = 0;
-            frameFin = FRAMECOUNT;
+            //aniFrame = 0;
+            //frameStart = 0;
 
             rotate = false;
 
@@ -49,14 +51,44 @@ namespace PacMan
             dead = false;
         }
 
-        public override void Draw()
+        //public override void Draw()
+        //{
+        //    aniFrame++;
+        //    if (aniFrame == frameFin)
+        //    {
+        //        aniFrame = frameStart;
+        //    }
+        //    maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
+        //}
+
+        public override void rotateSprite()
         {
-            aniFrame++;
-            if (aniFrame == frameFin)
+            switch (direction)
             {
-                aniFrame = frameStart;
+                case Direction.Right:
+                    frame = RIGHT;
+                    break;
+
+                case Direction.Left:
+                    frame = LEFT;
+                    break;
+
+                case Direction.Up:
+                    frame = UP;
+
+                    break;
+
+                case Direction.Down:
+                    frame = DOWN;
+                    break;
+
+                default:
+                    break;
             }
-            maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
+            aniFrame = frame;
+            frameStart = frame;
+            frameFin = frame + FRAMECOUNT;
+            rotate = false;
         }
 
         public bool EatKibble() //checks to see if pacman has landed on a square with kibble
@@ -134,43 +166,14 @@ namespace PacMan
 
         public void Dead()
         {
-            frameStart = DEAD;
-            frameFin = DEAD + 12;
-            //dead = true;
-        }
-
-        public override void rotateSprite()
-        {
-            switch (direction)
+            if (dead == false)
             {
-                case Direction.Right:
-                    frame = RIGHT;
-                    break;
-
-                case Direction.Left:
-                    frame = LEFT;
-                    break;
-
-                case Direction.Up:
-                    frame = UP;
-
-                    break;
-
-                case Direction.Down:
-                    frame = DOWN;
-                    break;
-
-                default:
-                    break;
+                frameStart = DEAD;
+                aniFrame = frameStart;
+                frameFin = DEAD + 12;
+                dead = true;
             }
 
-            //        if (rotate == true)
-            //{
-                aniFrame = frame;
-                frameStart = frame;
-                frameFin = frame + FRAMECOUNT;
-                rotate = false;
-            //}
         }
 
         public bool HitOpponent(Point opponentPosition)
