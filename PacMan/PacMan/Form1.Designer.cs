@@ -33,6 +33,7 @@ namespace Pacman
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,23 +49,39 @@ namespace Pacman
             this.textBox1.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox1.Font = new System.Drawing.Font("Broadway", 40.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.MintCream;
-            this.textBox1.Location = new System.Drawing.Point(1104, 520);
+            this.textBox1.Location = new System.Drawing.Point(1102, 474);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 76);
+            this.textBox1.Size = new System.Drawing.Size(329, 76);
             this.textBox1.TabIndex = 0;
             this.textBox1.TabStop = false;
+            this.textBox1.Text = "0000000";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pictureBox1.Image = global::PacMan.Properties.Resources.scoreboard;
-            this.pictureBox1.Location = new System.Drawing.Point(956, -10);
+            this.pictureBox1.Location = new System.Drawing.Point(1012, -18);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(585, 970);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(52)))), ((int)(((byte)(75)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBox2.Font = new System.Drawing.Font("Broadway", 40.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.MintCream;
+            this.textBox2.Location = new System.Drawing.Point(1102, 614);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(329, 76);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.TabStop = false;
+            this.textBox2.Text = "0000003";
             // 
             // Form1
             // 
@@ -72,6 +89,7 @@ namespace Pacman
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1813, 974);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
@@ -90,6 +108,7 @@ namespace Pacman
         private System.Windows.Forms.Timer timer1;
         internal System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

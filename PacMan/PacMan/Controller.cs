@@ -128,7 +128,8 @@ namespace PacMan
             if (pacman.EatKibble() == true)
             {
                 score++;
-                textBox1.Text = score.ToString();
+
+                textBox1.Text = score.ToString().PadLeft(7, '0');
             }
 
             foreach (Ghoul ghoul in ghouls)
