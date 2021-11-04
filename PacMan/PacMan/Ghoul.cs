@@ -41,14 +41,13 @@ namespace PacMan
             this.aniFrame = aniFrame;
             this.frameStart = frameStart;
             this.frameFin = frameFin;
-            this.frames = frames;
-            this.maze = maze;
-            this.position = position;
+     
+         
             startPosition = position;
             this.random = random;
             //position = new Point(GHOULSTARTX, GHOULSTARTY);
             //direction = Direction.Up;
-            this.direction = direction;
+        
             frame = 0;
             stringPos = (position.Y * CELLS) + position.X;
             //aniFrame = 0;

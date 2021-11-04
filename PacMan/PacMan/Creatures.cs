@@ -30,7 +30,7 @@ namespace PacMan
 
 
         //constructor
-        public Creature(List<Bitmap> frames, Maze maze, Point position, Direction direction, int frameFin, int aniframe, int frameStart)//do this with aniframe frameFin frameStart
+        public Creature(List<Bitmap> frames, Maze maze, Point position, Direction direction, int frameFin, int aniFrame, int frameStart)//do this with aniframe frameFin frameStart
         {
             this.aniFrame = aniFrame;
             this.frameStart = frameStart;

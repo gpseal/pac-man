@@ -21,6 +21,7 @@ namespace PacMan
         //private Ghoul ghoul4;
         private Maze maze;
         private Bitmap frame;
+        private int pacManLives;
         private List<Bitmap> pacmanFrames;
         private List<Bitmap> ghoul1Frames;
         private List<Bitmap> ghoul2Frames;
@@ -28,18 +29,22 @@ namespace PacMan
         private List<Bitmap> ghoul4Frames;
         private List<Ghoul> ghouls;
         private TextBox textBox1;
+        private TextBox textBox2;
         private int score;
         private int ghoulStart;
         private int counter;
         private bool pacPower;
 
-        public Controller(Maze maze, Random random, TextBox textBox1)
+        public Controller(Maze maze, Random random, TextBox textBox1, TextBox textBox2)
         {
+            pacManLives = 3;
             this.maze = maze;
             this.random = random;
             this.textBox1 = textBox1;
+            this.textBox2 = textBox2;
             score = 0;
-            textBox1.Text = score.ToString();
+            textBox2.Text = "test";
+            //textBox1.Text = score.ToString();
             pacmanFrames = new List<Bitmap>(); //creating list of animation framse for pacman
             for (int i = 1; i < PACFRAMECOUNT+1; i++)
             {
@@ -49,8 +54,8 @@ namespace PacMan
 
             ghoul1Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
             ghoul2Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
-            ghoul3Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
-            ghoul4Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
+            ghoul3Frames = new List<Bitmap>(); //creating list of animation frames for ghouls
+            ghoul4Frames = new List<Bitmap>(); //creating list of animation frames for ghouls
 
 
             for (int i = 0; i < GHOULFRAMECOUNT; i++)
@@ -85,19 +90,23 @@ namespace PacMan
 
         public void StartNewGame()
         {
-            pacman = null;
-            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
+
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Position = new Point(ghoulStart, 11);
                 ghoulStart++;
             }
+            //pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
+            pacman.PacmanReset();
+
 
             ghoulStart = 9;
         }
 
         public void PlayGame()
         {
+            textBox2.Text = pacman.Lives.ToString().PadLeft(7, '0');
+
             counter++;
             maze.Draw();
 

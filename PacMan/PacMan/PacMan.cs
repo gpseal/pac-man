@@ -9,6 +9,7 @@ namespace PacMan
 {
     public class PacMan : Creature
     {
+        private const int STARTLIVES = 3;
         private const int PACSTARTX = 10;
         private const int PACSTARTY = 13;
         private const int CELLS = 22;
@@ -18,7 +19,9 @@ namespace PacMan
         private const int UP = 6;
         private const int DOWN = 9;
         private const int DEAD = 12;
+
         private bool powerUp;
+        private int lives;
 
         private int rotation;
         private bool rotate;
@@ -51,17 +54,9 @@ namespace PacMan
 
             dead = false;
             powerUp = false;
+            lives = STARTLIVES;
         }
 
-        //public override void Draw()
-        //{
-        //    aniFrame++;
-        //    if (aniFrame == frameFin)
-        //    {
-        //        aniFrame = frameStart;
-        //    }
-        //    maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
-        //}
 
         public override void rotateSprite()
         {
@@ -107,6 +102,17 @@ namespace PacMan
             return eat;
         }
 
+        public void PacmanReset()
+        {
+            position = new Point(12, 13);
+            direction = Direction.Left;
+            dead = false;
+            aniFrame = 0;
+            frameStart = aniFrame;
+            frameFin = aniFrame + FRAMECOUNT;
+            //rotate = false;
+        }
+
         public bool PowerUp() //checks to see if pacman has landed on a square with kibble
         {
             bool powerUp = false;
@@ -118,65 +124,6 @@ namespace PacMan
             return powerUp;
         }
 
-        //public void Move()
-        //{
-        //int headX = position.X;
-        //int headY = position.Y;
-        //stringPos = (headY * CELLS) + headX;
-
-        //switch (direction)
-        //{
-        //    case Direction.Right:
-        //        rotateSprite(RIGHT);
-
-        //        if (stringPos == 240)
-        //        {
-        //            headX = headX-19;
-        //        }
-
-        //        else if (maze.CurrentMap1[stringPos + 1] != 'w')
-        //        {
-        //            headX++;
-        //        }
-        //        break;
-
-        //    case Direction.Left:
-
-        //        rotateSprite(LEFT);
-
-        //        if (maze.CurrentMap1[stringPos-1] != 'w')
-        //        {
-        //            headX--;
-        //        }
-        //        break;
-
-        //    case Direction.Up:
-
-        //        rotateSprite(UP);
-
-        //        if (maze.CurrentMap1[stringPos - 22] != 'w')
-        //        {
-        //            headY--;
-        //        }
-        //        break;
-
-        //    case Direction.Down:
-
-        //        rotateSprite(DOWN); //9 represents start frame of downward animation sequence
-
-        //        if (maze.CurrentMap1[stringPos + 22] != 'w'  && maze.CurrentMap1[stringPos + 22] != 'j')
-        //        {
-        //            headY++;
-        //        }
-        //        break;
-
-        //    default:
-        //        break;
-        //}
-
-        //position = new Point(headX, headY);
-        //}
-
         public void Dead()
         {
             if (dead == false)
@@ -185,8 +132,8 @@ namespace PacMan
                 aniFrame = frameStart;
                 frameFin = DEAD + 12;
                 dead = true;
+                lives--;
             }
-
         }
 
         public bool HitOpponent(Point opponentPosition)
@@ -197,7 +144,6 @@ namespace PacMan
             {
                 hitOpponent = true;
             }
-
             return hitOpponent;
         }
 
@@ -207,5 +153,6 @@ namespace PacMan
         public int StringPos { get => stringPos; set => stringPos = value; }
         public bool Dead1 { get => dead; set => dead = value; }
         public int AniFrame { get => aniFrame; set => aniFrame = value; }
+        public int Lives { get => lives; set => lives = value; }
     }
 }

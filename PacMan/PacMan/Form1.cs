@@ -41,7 +41,7 @@ namespace Pacman
             // important, need to add the maze object to the list of controls on the form
             Controls.Add(maze);
 
-            controller = new Controller(maze, random, textBox1);
+            controller = new Controller(maze, random, textBox1, textBox2);
             //controller.StartNewGame();
             deadCount = 0;
 
