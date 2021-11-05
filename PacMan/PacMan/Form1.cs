@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,7 +13,7 @@ namespace Pacman
 {
     public partial class Form1 : Form
     {
-        private const int FORMHEIGHT = 795;
+        private const int FORMHEIGHT = 835;
         private const int FORMWIDTH = 1175;
 
         //declare the Maze object so it can be used throughout the form
@@ -20,6 +21,10 @@ namespace Pacman
         private Random random;
         private Controller controller;
         private int deadCount;
+        private Bitmap gameEnd;
+
+        private Bitmap wall;
+        private SoundPlayer gameOver;
 
         public Form1()
         {
@@ -47,6 +52,7 @@ namespace Pacman
 
             // remember the Timer Enabled Property is set to false as a default
             timer1.Enabled = true;
+            gameOver = new SoundPlayer(PacMan.Properties.Resources.EndGame);
 
         }
 
@@ -54,25 +60,21 @@ namespace Pacman
         {
             controller.PlayGame();
 
-            //if (controller.Dead == true)
-            //{
-            //    deadCount++;
-            //    if (deadCount == 15)
-            //    {
-            //        timer1.Enabled = !timer1.Enabled;
-            //    }
-                
-                
-            //}
+            if (controller.playerLose() == true)
+            {
+                pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
+                pictureBox2.Visible = true;
+                gameOver.Play();
+            }
+
+            if (controller.playerWin() == true)
+            {
+                timer1.Enabled = false;
+                pictureBox2.Image = PacMan.Properties.Resources.winScreen;
+                pictureBox2.Visible = true;
+            }
+
         }
-
-        //private void SetUpDataGridView()// settings for maze grid https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datagridview.gridcolor?view=windowsdesktop-5.0
-        //{
-        //    //this.Controls.Add(maze);
-        //    //maze.CellBorderStyle = DataGridViewCellBorderStyle.None;
-        //}
-
-
 
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
@@ -101,6 +103,16 @@ namespace Pacman
                 }
             }
 
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controller.Reset();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.ExitThread();
         }
     }
 }

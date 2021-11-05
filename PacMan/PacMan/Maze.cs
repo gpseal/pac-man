@@ -13,7 +13,7 @@ namespace PacMan
         private const int NROWSCOLUMNS = 22;                          // Number of cells in each row and column
         private const int CELLSIZE = 37;
         private const int SPACESIZE = 4;
-        private const int NKIBBLES = 12;
+        private const int NKIBBLES = 208;
 
         private const string STARTMAP = "wwwwwwwwwwwwwwwwwwwwww" +
                                 "wckPkkkkkkwwckkkkkPkkw" +
@@ -71,7 +71,7 @@ namespace PacMan
 
 
             // set position of maze on the Form
-            Top = -30;
+            Top = 0;
             Left = -30;
 
             // setup the columns to display images. We want to display images, so we set 5 columns worth of Image columns
@@ -161,8 +161,14 @@ namespace PacMan
             }
         }
 
+        public void Reset()
+        {
+            currentMap = STARTMAP.ToCharArray();
+        }
+
         //public string CurrentMap { get => currentMap; set => currentMap = value; }
         public Bitmap Kibble { get => kibble; set => kibble = value; }
         public char[] CurrentMap1 { get => currentMap; set => currentMap = value; }
+        public int NKibbles { get => nKibbles; set => nKibbles = value; }
     }
 }

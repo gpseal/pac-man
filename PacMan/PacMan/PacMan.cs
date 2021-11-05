@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@ namespace PacMan
         //private Direction direction;
         //private int stringPos;
         private bool dead;
+        private SoundPlayer pacDeath;
 
         public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
             :base(frames, maze, position, direction, frameFin, aniframe, frameStart)
@@ -55,6 +57,7 @@ namespace PacMan
             dead = false;
             powerUp = false;
             lives = STARTLIVES;
+            pacDeath = new SoundPlayer(Properties.Resources.collide);
         }
 
 
@@ -98,6 +101,7 @@ namespace PacMan
             {
                 eat = true;
                 maze.CurrentMap1[stringPos] = 'b';
+                maze.NKibbles--;
             }
             return eat;
         }
@@ -126,6 +130,7 @@ namespace PacMan
 
         public void Dead()
         {
+            pacDeath.Play();
             if (dead == false)
             {
                 frameStart = DEAD;

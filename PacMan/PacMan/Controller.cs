@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +23,7 @@ namespace PacMan
         private Maze maze;
         private Bitmap frame;
         private int pacManLives;
+        
         private List<Bitmap> pacmanFrames;
         private List<Bitmap> ghoul1Frames;
         private List<Bitmap> ghoul2Frames;
@@ -34,6 +36,8 @@ namespace PacMan
         private int ghoulStart;
         private int counter;
         private bool pacPower;
+        private SoundPlayer pacDeath;
+        private SoundPlayer eatKibbleSound;
 
         public Controller(Maze maze, Random random, TextBox textBox1, TextBox textBox2)
         {
@@ -43,7 +47,6 @@ namespace PacMan
             this.textBox1 = textBox1;
             this.textBox2 = textBox2;
             score = 0;
-            textBox2.Text = "test";
             //textBox1.Text = score.ToString();
             pacmanFrames = new List<Bitmap>(); //creating list of animation framse for pacman
             for (int i = 1; i < PACFRAMECOUNT+1; i++)
@@ -86,11 +89,31 @@ namespace PacMan
             ghoulStart = 9;
             counter = 0;
             pacPower = false;
+            pacDeath = new SoundPlayer (Properties.Resources.collide);
+            eatKibbleSound = new SoundPlayer(Properties.Resources.wakka);
         }
 
-        public void StartNewGame()
-        {
 
+        public void Reset()
+        {
+            foreach (Ghoul ghoul in ghouls)
+            {
+                ghoul.Position = new Point(ghoulStart, 11);
+                ghoulStart++;
+            }
+
+            pacman = null;
+            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
+
+            maze.Reset();
+            score = 0;
+            ghoulStart = 9;
+        }
+
+
+
+        public void StartNewLife()
+        {
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Position = new Point(ghoulStart, 11);
@@ -105,6 +128,15 @@ namespace PacMan
 
         public void PlayGame()
         {
+            if (pacman.Dead1 == true)
+            {
+                pacDeath.Play();
+            }
+
+            if (pacman.Lives == 0)
+            {
+                
+            }
             textBox2.Text = pacman.Lives.ToString().PadLeft(7, '0');
 
             counter++;
@@ -153,7 +185,7 @@ namespace PacMan
 
                 else if (pacman.HitOpponent(ghoul.Position) && pacman.Dead1 == false)
                 {
-                    //pacman.Dead1 = true;
+                    //pacDeath.Play();
                     pacman.Dead();
                 }
 
@@ -183,8 +215,8 @@ namespace PacMan
 
             if (pacman.EatKibble() == true)
             {
+                //eatKibbleSound.Play();
                 score++;
-
                 textBox1.Text = score.ToString().PadLeft(7, '0');
             }
 
@@ -198,13 +230,17 @@ namespace PacMan
                 else if (pacman.HitOpponent(ghoul.Position))
                 {
                     //pacman.Dead1 = true;
+                    //pacDeath.Play();
                     pacman.Dead();
                 }
             }
 
             if (pacman.AniFrame == 23)
             {
-                StartNewGame();
+                if (pacman.Lives != 0)
+                {
+                    StartNewLife();
+                }
             }
         }
 
@@ -213,6 +249,29 @@ namespace PacMan
             pacman.Rotate = true;
             pacman.Direction = direction;
             pacman.rotateSprite();
+        }
+
+
+        public bool playerLose()
+        {
+            bool lose = false;
+            if (pacman.Lives == 0)
+            {
+                lose = true;
+            }
+            return lose;
+        }
+
+        public bool playerWin()
+        {
+            bool win = false;
+
+            if (maze.NKibbles == 0)
+            {
+                win = true;
+            }
+
+            return win;
         }
 
 

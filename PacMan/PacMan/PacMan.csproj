@@ -1068,5 +1068,44 @@
   <ItemGroup>
     <None Include="Resources\ghoul3.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\winScreen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loseScreen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\collide.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EndGame.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FruitEat.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KibbleEat.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacman_beginning.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacman_chomp.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacman_extrapac.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pacman_intermission.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\portal.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wakka.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
