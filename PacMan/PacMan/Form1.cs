@@ -13,8 +13,8 @@ namespace Pacman
 {
     public partial class Form1 : Form
     {
-        private const int FORMHEIGHT = 835;
-        private const int FORMWIDTH = 1175;
+        private const int FORMHEIGHT = 680;
+        private const int FORMWIDTH = 960;
 
         //declare the Maze object so it can be used throughout the form
         private Maze maze;
@@ -71,7 +71,7 @@ namespace Pacman
             if (counter == 1)
             {
                 //controller.BackgroundMusic();
-                gameStartMusic.PlaySync();
+                //gameStartMusic.PlaySync();
             }
 
             if (controller.playerLose() == true)

@@ -11,7 +11,7 @@ namespace PacMan
     public class Maze : DataGridView
     {
         private const int NROWSCOLUMNS = 22;                          // Number of cells in each row and column
-        private const int CELLSIZE = 37;
+        private const int CELLSIZE = 30;
         private const int SPACESIZE = 4;
         private const int NKIBBLES = 208;
 
@@ -72,7 +72,7 @@ namespace PacMan
 
             // set position of maze on the Form
             Top = 0;
-            Left = -30;
+            Left = -25;
 
             // setup the columns to display images. We want to display images, so we set 5 columns worth of Image columns
             for (int x = 0; x < NROWSCOLUMNS; x++)

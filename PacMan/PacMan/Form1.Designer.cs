@@ -54,12 +54,12 @@ namespace Pacman
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(52)))), ((int)(((byte)(75)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox1.Font = new System.Drawing.Font("Broadway", 40.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Broadway", 34.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.MintCream;
-            this.textBox1.Location = new System.Drawing.Point(1101, 500);
+            this.textBox1.Location = new System.Drawing.Point(891, 407);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(329, 76);
+            this.textBox1.Size = new System.Drawing.Size(293, 66);
             this.textBox1.TabIndex = 0;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "0000000";
@@ -69,12 +69,12 @@ namespace Pacman
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(52)))), ((int)(((byte)(75)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBox2.Font = new System.Drawing.Font("Broadway", 40.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Broadway", 34.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.MintCream;
-            this.textBox2.Location = new System.Drawing.Point(1101, 639);
+            this.textBox2.Location = new System.Drawing.Point(891, 518);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(329, 76);
+            this.textBox2.Size = new System.Drawing.Size(293, 66);
             this.textBox2.TabIndex = 1;
             this.textBox2.TabStop = false;
             this.textBox2.Text = "0";
@@ -86,7 +86,7 @@ namespace Pacman
             this.gameToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(2266, 38);
+            this.menuStrip1.Size = new System.Drawing.Size(1813, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -96,7 +96,7 @@ namespace Pacman
             this.resetToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(62, 34);
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.gameToolStripMenuItem.Text = "Game";
             // 
             // resetToolStripMenuItem
@@ -116,9 +116,9 @@ namespace Pacman
             // pictureBox2
             // 
             this.pictureBox2.Image = global::PacMan.Properties.Resources.winScreen;
-            this.pictureBox2.Location = new System.Drawing.Point(10, 365);
+            this.pictureBox2.Location = new System.Drawing.Point(8, 297);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(951, 275);
+            this.pictureBox2.Size = new System.Drawing.Size(770, 221);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -128,7 +128,7 @@ namespace Pacman
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pictureBox1.Image = global::PacMan.Properties.Resources.scoreboard;
-            this.pictureBox1.Location = new System.Drawing.Point(998, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(805, 28);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(585, 970);
