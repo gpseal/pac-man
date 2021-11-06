@@ -218,15 +218,15 @@ namespace PacMan
             
 
             //dead.Play();
-            if (pacman.Dead1 == true)
-            {
-                //pacDeath.Play();
-            }
+            //if (pacman.Dead1 == true)
+            //{
+            //    //pacDeath.Play();
+            //}
 
-            if (pacman.Lives == 0)
-            {
+            //if (pacman.Lives == 0)
+            //{
                 
-            }
+            //}
             textBox2.Text = pacman.Lives.ToString().PadLeft(7, '0');
 
             counter++;

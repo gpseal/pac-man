@@ -125,6 +125,9 @@ namespace Pacman
         {
             
             controller.Reset();
+            timer1.Enabled = true;
+            pictureBox2.Visible = false;
+            counter = 0;
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
