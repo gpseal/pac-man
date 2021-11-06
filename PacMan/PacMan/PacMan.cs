@@ -26,14 +26,12 @@ namespace PacMan
 
         private int rotation;
         private bool rotate;
-        //private Point position;
-        //private int aniFrame;
-        //private int frameStart;
-        //private int frameFin;
-        //private Direction direction;
-        //private int stringPos;
         private bool dead;
         private SoundPlayer pacDeath;
+        private SoundPlayer eatKibble;
+        private SoundPlayer eatGhost;
+
+        private int musicCounter;
 
         public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
             :base(frames, maze, position, direction, frameFin, aniframe, frameStart)
@@ -58,6 +56,10 @@ namespace PacMan
             powerUp = false;
             lives = STARTLIVES;
             pacDeath = new SoundPlayer(Properties.Resources.collide);
+            eatKibble = new SoundPlayer(Properties.Resources.eat);
+            //eatKibble.Play();
+            eatGhost = new SoundPlayer(Properties.Resources.eatGhost);
+            musicCounter = 0;
         }
 
 
@@ -91,6 +93,12 @@ namespace PacMan
             rotate = false;
         }
 
+
+        public void EatGhost()
+        {
+            eatGhost.Play();
+        }
+
         public bool EatKibble() //checks to see if pacman has landed on a square with kibble
         {
             bool eat = false;
@@ -102,6 +110,7 @@ namespace PacMan
                 eat = true;
                 maze.CurrentMap1[stringPos] = 'b';
                 maze.NKibbles--;
+                eatKibble.Play();
             }
             return eat;
         }
@@ -117,20 +126,21 @@ namespace PacMan
             //rotate = false;
         }
 
-        public bool PowerUp() //checks to see if pacman has landed on a square with kibble
+        public bool PowerUp() //checks to see if pacman has landed on a square with a power up
         {
             bool powerUp = false;
             if (maze.CurrentMap1[stringPos] == 'P')
             { 
                 powerUp = true;
                 maze.CurrentMap1[stringPos] = 'b';
+                musicCounter = 0;
             }
             return powerUp;
         }
 
         public void Dead()
         {
-            pacDeath.Play();
+            //pacDeath.PlaySync();
             if (dead == false)
             {
                 frameStart = DEAD;
@@ -138,6 +148,7 @@ namespace PacMan
                 frameFin = DEAD + 12;
                 dead = true;
                 lives--;
+                pacDeath.Play();
             }
         }
 
@@ -159,5 +170,6 @@ namespace PacMan
         public bool Dead1 { get => dead; set => dead = value; }
         public int AniFrame { get => aniFrame; set => aniFrame = value; }
         public int Lives { get => lives; set => lives = value; }
+        public int MusicCounter { get => musicCounter; set => musicCounter = value; }
     }
 }

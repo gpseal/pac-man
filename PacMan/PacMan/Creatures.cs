@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,7 +28,6 @@ namespace PacMan
         protected int aniFrame;
         protected int frameFin;
         protected int frameStart;
-
 
         //constructor
         public Creature(List<Bitmap> frames, Maze maze, Point position, Direction direction, int frameFin, int aniFrame, int frameStart)//do this with aniframe frameFin frameStart
@@ -92,6 +92,7 @@ namespace PacMan
                     if (stringPos == 221)
                     {
                         headX = headX + 19;
+
                     }
 
                     else if (maze.CurrentMap1[stringPos - 1] != 'w')

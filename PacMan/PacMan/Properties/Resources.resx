@@ -268,6 +268,9 @@
   <data name="power" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\power.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="burp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\burp.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="collide" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\collide.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -306,5 +309,14 @@
   </data>
   <data name="winScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\winScreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eat.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="eatGhost" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eatGhost.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="victory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\victory.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

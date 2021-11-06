@@ -71,11 +71,39 @@ namespace PacMan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] burp {
+            get {
+                object obj = ResourceManager.GetObject("burp", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream collide {
             get {
                 return ResourceManager.GetStream("collide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream eat {
+            get {
+                return ResourceManager.GetStream("eat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream eatGhost {
+            get {
+                return ResourceManager.GetStream("eatGhost", resourceCulture);
             }
         }
         
@@ -638,6 +666,15 @@ namespace PacMan.Properties {
             get {
                 object obj = ResourceManager.GetObject("scoreboard1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream victory {
+            get {
+                return ResourceManager.GetStream("victory", resourceCulture);
             }
         }
         

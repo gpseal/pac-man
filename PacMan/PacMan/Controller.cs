@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -6,6 +7,9 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
+using System.IO;
+
 
 namespace PacMan
 {
@@ -36,8 +40,21 @@ namespace PacMan
         private int ghoulStart;
         private int counter;
         private bool pacPower;
-        private SoundPlayer pacDeath;
-        private SoundPlayer eatKibbleSound;
+        private SoundPlayer dead;
+        private SoundPlayer gameOver;
+        private WindowsMediaPlayer Player;
+        private WindowsMediaPlayer powerPlayer;
+        private string rootFolder;
+        private string path;
+        private string wakkaSound;
+        private string wakkaPath;
+        private string scaredGhosts;
+        private bool powerMusic;
+        private bool musicPlaying;
+
+        private int musicCounter;
+
+        public int MusicCounter { get => musicCounter; set => musicCounter = value; }
 
         public Controller(Maze maze, Random random, TextBox textBox1, TextBox textBox2)
         {
@@ -89,13 +106,42 @@ namespace PacMan
             ghoulStart = 9;
             counter = 0;
             pacPower = false;
-            pacDeath = new SoundPlayer (Properties.Resources.collide);
-            eatKibbleSound = new SoundPlayer(Properties.Resources.wakka);
+
+            dead = new SoundPlayer();
+            dead.Stream = Properties.Resources.KibbleEat;
+            gameOver = new SoundPlayer(Properties.Resources.EndGame);
+
+            path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName); //https://stackoverflow.com/questions/14899422/how-to-navigate-a-few-folders-up
+            wakkaSound = "/Resources/wakka.wav";
+            wakkaPath = path + "/Resources/wakka.wav";
+            scaredGhosts = path + "/Resources/pacman_intermission.wav";
+
+            musicCounter = 0;
+            powerMusic = false;
+            musicPlaying = false;
+            Player = new WMPLib.WindowsMediaPlayer();
+            Player.URL = wakkaPath;
+            powerPlayer = new WMPLib.WindowsMediaPlayer();
+            powerPlayer.URL = scaredGhosts;
+            powerPlayer.controls.stop();
+
         }
+
+        //public void PlayFile(String url)  //https://docs.microsoft.com/en-us/windows/win32/wmp/creating-the-windows-media-player-control-programmatically?redirectedfrom=MSDN
+        //{
+        //    Player = null;
+        //    Player = new WMPLib.WindowsMediaPlayer();
+        //    Player.controls.stop();
+        //    Player.URL = url;
+        //    Player.settings.setMode("loop", true);
+        //    Player.controls.play();
+        //    musicPlaying = true;
+        //}
 
 
         public void Reset()
         {
+            
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Position = new Point(ghoulStart, 11);
@@ -126,11 +172,55 @@ namespace PacMan
             ghoulStart = 9;
         }
 
+        //public void BackgroundMusic(string path) //https://docs.microsoft.com/en-us/windows/win32/wmp/creating-the-windows-media-player-control-programmatically?redirectedfrom=MSDN
+        //{
+        //    //if (Player.playState == WMPPlayState.wmppsPlaying)
+        //    //{
+        //    //    Player.controls.stop();
+        //    //}
+        //    PlayFile(path);
+        //    //Player.controls.play();
+        //    musicCounter = 1;
+        //}
+
+        public void BackgroundMusic()
+        {
+            if (powerMusic == true)
+            {
+                Player.controls.stop();
+                powerPlayer.controls.play();
+            }
+
+            else if (maze.NKibbles != 0 && playerLose() == false && pacman.Dead1 == false)
+            {
+                Player.controls.play();
+                powerPlayer.controls.stop();
+            }
+
+            else
+            {
+                Player.controls.stop();
+                powerPlayer.controls.stop();
+            }
+            //Player.controls.play();
+            Player.settings.setMode("loop", true);
+            powerPlayer.settings.setMode("loop", true);
+        }
+
         public void PlayGame()
         {
+            //if (pacman.MusicCounter == 0)
+            //{
+            //    BackgroundMusic();
+            //    pacman.MusicCounter++;
+            //}
+
+            
+
+            //dead.Play();
             if (pacman.Dead1 == true)
             {
-                pacDeath.Play();
+                //pacDeath.Play();
             }
 
             if (pacman.Lives == 0)
@@ -156,22 +246,22 @@ namespace PacMan
                     ghoul.ScaredGhost();
                 }
 
-
                 counter = 0;
                 pacPower = false;
+                powerMusic = true;
             }
 
             if (counter > 45)
             {
+                powerMusic = false;
+                pacman.MusicCounter = 0;
                 foreach (Ghoul ghoul in ghouls)
                 {
                     ghoul.Scared = false;
                     ghoul.ScaredGhost();
                     ghoul.Jail = false;
                 }
-
             }
-
 
             foreach (Ghoul ghoul in ghouls)
             {
@@ -181,6 +271,7 @@ namespace PacMan
                 if (pacman.HitOpponent(ghoul.Position)&& ghoul.Scared == true)
                 {
                     ghoul.Dead();
+                    pacman.EatGhost();
                 }
 
                 else if (pacman.HitOpponent(ghoul.Position) && pacman.Dead1 == false)
@@ -215,7 +306,7 @@ namespace PacMan
 
             if (pacman.EatKibble() == true)
             {
-                //eatKibbleSound.Play();
+                //dead.PlaySync();
                 score++;
                 textBox1.Text = score.ToString().PadLeft(7, '0');
             }
@@ -225,6 +316,7 @@ namespace PacMan
                 if (pacman.HitOpponent(ghoul.Position) && ghoul.Scared == true)
                 {
                     ghoul.Dead();
+                    pacman.EatGhost();
                 }
 
                 else if (pacman.HitOpponent(ghoul.Position))
@@ -242,6 +334,8 @@ namespace PacMan
                     StartNewLife();
                 }
             }
+
+            BackgroundMusic();
         }
 
         public void SetPacManDirection(Direction direction)
@@ -270,7 +364,6 @@ namespace PacMan
             {
                 win = true;
             }
-
             return win;
         }
 
