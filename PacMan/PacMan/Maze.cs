@@ -71,7 +71,7 @@ namespace PacMan
 
 
             // set position of maze on the Form
-            Top = 0;
+            Top = 1;
             Left = -25;
 
             // setup the columns to display images. We want to display images, so we set 5 columns worth of Image columns
@@ -163,6 +163,7 @@ namespace PacMan
 
         public void Reset()
         {
+            nKibbles = NKIBBLES;
             currentMap = STARTMAP.ToCharArray();
         }
 

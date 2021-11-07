@@ -111,6 +111,7 @@ namespace PacMan
                 maze.CurrentMap1[stringPos] = 'b';
                 maze.NKibbles--;
                 eatKibble.Play();
+
             }
             return eat;
         }

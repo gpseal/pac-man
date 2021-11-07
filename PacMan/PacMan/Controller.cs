@@ -209,24 +209,7 @@ namespace PacMan
 
         public void PlayGame()
         {
-            //if (pacman.MusicCounter == 0)
-            //{
-            //    BackgroundMusic();
-            //    pacman.MusicCounter++;
-            //}
 
-            
-
-            //dead.Play();
-            //if (pacman.Dead1 == true)
-            //{
-            //    //pacDeath.Play();
-            //}
-
-            //if (pacman.Lives == 0)
-            //{
-                
-            //}
             textBox2.Text = pacman.Lives.ToString().PadLeft(7, '0');
 
             counter++;
@@ -265,6 +248,21 @@ namespace PacMan
 
             foreach (Ghoul ghoul in ghouls)
             {
+                if (pacman.Dead1 == false && ghoul.Jail == false)
+                {
+                    if ((ghoul.Scared == true) && (counter % 2 == 0))
+                    {
+
+                    }
+                    else
+                    {
+                        ghoul.Move();
+                    }
+
+                    ghoul.ChangeDirection();
+                    ghoul.CheckForGaps();
+                    ghoul.PacManPosition(pacman.Position.Y);
+                }
                 ghoul.Draw();
                 ghoul.PacManPosition(pacman.Position.Y);
 
@@ -280,32 +278,27 @@ namespace PacMan
                     pacman.Dead();
                 }
 
-                if (pacman.Dead1 == false && ghoul.Jail == false)
-                {
-                    if ((ghoul.Scared == true) && (counter%2 == 0))
-                    {
 
-                    }
-                    else
-                    {
-                        ghoul.Move();
-                    }
-                    
-                    ghoul.ChangeDirection();
-                    ghoul.CheckForGaps();
-                    ghoul.PacManPosition(pacman.Position.Y);
-                }
                 
             }
 
-            pacman.Draw();
             if (pacman.Dead1 == false)
             {
                 pacman.Move();
             }
 
+            pacman.Draw();
+
+
             if (pacman.EatKibble() == true)
             {
+                maze.Draw();
+                pacman.Draw();
+                foreach (Ghoul ghoul in ghouls)
+                {
+                    ghoul.Draw();
+                }
+
                 //dead.PlaySync();
                 score++;
                 textBox1.Text = score.ToString().PadLeft(7, '0');

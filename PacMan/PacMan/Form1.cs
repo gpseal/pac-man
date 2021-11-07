@@ -71,7 +71,7 @@ namespace Pacman
             if (counter == 1)
             {
                 //controller.BackgroundMusic();
-                //gameStartMusic.PlaySync();
+                gameStartMusic.PlaySync();
             }
 
             if (controller.playerLose() == true)

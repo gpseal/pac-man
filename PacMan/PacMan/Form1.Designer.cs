@@ -116,7 +116,7 @@ namespace Pacman
             // pictureBox2
             // 
             this.pictureBox2.Image = global::PacMan.Properties.Resources.winScreen;
-            this.pictureBox2.Location = new System.Drawing.Point(8, 297);
+            this.pictureBox2.Location = new System.Drawing.Point(8, 298);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(770, 221);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -128,7 +128,7 @@ namespace Pacman
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pictureBox1.Image = global::PacMan.Properties.Resources.scoreboard;
-            this.pictureBox1.Location = new System.Drawing.Point(805, 28);
+            this.pictureBox1.Location = new System.Drawing.Point(805, 29);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(585, 970);
