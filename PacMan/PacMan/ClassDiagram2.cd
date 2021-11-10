@@ -1,2 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PacMan.Controller">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AqAAAEAASAAIFQABCACaAABIkCAAAENYEAZBMQBgAIA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.Creature">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEIgAIgAIgiAAACQIAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Creatures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.Ghoul">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAAEIAAAEgABhgAAAIAAAAAAAACCAAAgQACAIAgAA=</HashCode>
+      <FileName>Ghoul.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.Maze">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAhAAAACABgBAAAAQAAhwGAEQAAQAAAAEAAAhAAI=</HashCode>
+      <FileName>Maze.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacMan.PacMan">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAACAARCAEAEgQgACAABAAAAAIiAAAqCgAECABAAAA=</HashCode>
+      <FileName>PacMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pacman.Form1">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AywAAAAAACAAAIEAAQiQAAICAAACIAEAEARIAABAAIA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PacMan.Direction">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
+      <FileName>Direction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PacMan.ErrorMessage">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>ErrorMessage.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

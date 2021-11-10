@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Parent Class of PacMan and Ghouls.
+ * Draws and moves characters while detecting walls.  Detects if PacMan and a ghoul have come into contact
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

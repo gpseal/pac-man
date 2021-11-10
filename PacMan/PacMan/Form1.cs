@@ -12,7 +12,10 @@
                         Ghosts search for PacMan
                         PacMan animates at four angles
                         Grid is 22 X 22 to enable a 20 x 20 playing area
-                        
+                        Player can reset game if necessary
+                        PacMan can power up and consume ghosts.
+                        Characters can teleport on appropriate squares
+                        Ending music has been added
 */
 
 using PacMan;
@@ -77,8 +80,7 @@ namespace Pacman
                 case ErrorMessage.playWins:
                     {
                         timer1.Enabled = false;
-                        controller.PowerMusic = false;
-                        controller.BackgroundMusic();
+                        controller.Music();
                         victory.Play();
                         pictureBox2.Image = PacMan.Properties.Resources.winScreen;
                         pictureBox2.Visible = true;
@@ -89,8 +91,7 @@ namespace Pacman
                     {
                         pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
                         pictureBox2.Visible = true;
-                        controller.PowerMusic = false;
-                        controller.BackgroundMusic();
+                        controller.Music();
                         gameOver.Play();
                         timer1.Enabled = false;
                         break;

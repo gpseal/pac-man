@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Creates and controls Ghoul character.
+ * Animates sprite and moves around the playing area
+ * Establishes if PacMan is powered up, and if Ghoul is eaten by PacMan.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

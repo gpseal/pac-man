@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Creates and controls PacMan character.
+ * Animates sprite and changes frames depending on direction of character.
+ * Establishes if PacMan eats kibble, resets PacMan, kills PacMan, powers Up PacMan
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -46,7 +52,7 @@ namespace PacMan
             eatGhost = new SoundPlayer(Properties.Resources.eatGhost);
         }
 
-        //changes animation frames depending on what direction pacman is facing
+        //changes animation frames depending on what direction PacMan is facing
         public void rotateSprite()
         {
             switch (direction)
@@ -82,7 +88,7 @@ namespace PacMan
             eatGhost.Play();
         }
 
-        //checks to see if pacman has landed on a square with kibble
+        //checks to see if PacMan has landed on a square with kibble
         public bool EatKibble() 
         {
             bool eat = false;

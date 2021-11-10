@@ -1,4 +1,6 @@
-﻿
+﻿/*
+ * For error detection
+ */
 
 using Microsoft.VisualBasic.Devices;
 using System;
@@ -42,16 +44,7 @@ namespace PacMan
         private int ghoulStart;
         private int counter;
         private bool pacPower;
-        private SoundPlayer dead;
-        private SoundPlayer gameOver;
-        private WindowsMediaPlayer Player;
-        private WindowsMediaPlayer powerPlayer;
-        private string path;
-        private string wakkaSound;
-        private string wakkaPath;
-        private string scaredGhosts;
-        private bool powerMusic;
-        private int musicCounter;
+        private Sound sound;
 
         //Constructor
         public Controller(Maze maze, Random random, TextBox textBox1, TextBox textBox2)
@@ -100,26 +93,8 @@ namespace PacMan
             ghoulStart = GHOULSTARTX;
             counter = 0;
             pacPower = false;
-
-            dead = new SoundPlayer();
-            dead.Stream = Properties.Resources.KibbleEat;
-            gameOver = new SoundPlayer(Properties.Resources.EndGame);
-
-            path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName); //https://stackoverflow.com/questions/14899422/how-to-navigate-a-few-folders-up
-            wakkaSound = "/Resources/wakka.wav";
-            wakkaPath = path + "/Resources/wakka.wav";
-            scaredGhosts = path + "/Resources/pacman_intermission.wav";
-
-            // sound effects
-            musicCounter = 0;
-            powerMusic = false;
-            Player = new WMPLib.WindowsMediaPlayer(); //https://docs.microsoft.com/en-us/windows/win32/wmp/embedding-the-windows-media-player-control-in-a-c--solution
-            Player.URL = wakkaPath;
-            powerPlayer = new WMPLib.WindowsMediaPlayer();
-            powerPlayer.URL = scaredGhosts;
-            powerPlayer.controls.stop();
-            Player.settings.setMode("loop", true);
-            powerPlayer.settings.setMode("loop", true);
+            sound = new Sound();
+            //musicCounter = 0;
         }
 
         //resets game
@@ -149,29 +124,7 @@ namespace PacMan
             pacman.PacmanReset();
             ghoulStart = GHOULSTARTX;
         }
-
-        //plays & changes background music
-        public void BackgroundMusic()
-        {
-            if (powerMusic == true)
-            {
-                Player.controls.stop();
-                powerPlayer.controls.play();
-            }
-
-            else if ((maze.NKibbles != 0) && (playerLose() == false) && (pacman.Dead1 == false))
-            {
-                Player.controls.play();
-                powerPlayer.controls.stop();
-            }
-
-            else
-            {
-                Player.controls.stop();
-                powerPlayer.controls.stop();
-            }
-        }
-
+        
         //runs game
         public ErrorMessage PlayGame()
         {
@@ -188,12 +141,12 @@ namespace PacMan
                 }
                 counter = 0;//counter for PacMan power up
                 pacPower = false;
-                powerMusic = true;//changes background music
+                sound.PowerMusic1 = true;//changes background music
             }
 
             if (counter > 45)  //turns off PacMan powerup mode
             {
-                powerMusic = false;
+                sound.PowerMusic1 = false;
                 foreach (Ghoul ghoul in ghouls)
                 {
                     ghoul.Scared = false;
@@ -259,7 +212,7 @@ namespace PacMan
                 }
             }
 
-            BackgroundMusic();
+            Music();
 
             ErrorMessage message = ErrorMessage.noError;
 
@@ -318,6 +271,7 @@ namespace PacMan
 
             if (maze.NKibbles == 0)
             {
+                sound.PowerMusic1 = false;
                 win = true;
             }
             return win;
@@ -345,7 +299,11 @@ namespace PacMan
             }
         }
 
-        public int MusicCounter { get => musicCounter; set => musicCounter = value; }
-        public bool PowerMusic { get => powerMusic; set => powerMusic = value; }
+        public void Music()
+        {
+            sound.BackgroundMusic(maze.NKibbles, playerLose(), pacman.Dead1);
+        }
+
+        //public int MusicCounter { get => musicCounter; set => musicCounter = value; }
     }
 }
