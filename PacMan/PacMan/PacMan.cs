@@ -10,11 +10,11 @@ namespace PacMan
 {
     public class PacMan : Creature
     {
+        //Constants
         private const int STARTLIVES = 3;
-        //private const int PACSTARTX = 10;
-        //private const int PACSTARTY = 13;
         private const int FRAMECOUNT = 3;
 
+        //fields
         private const int RIGHT = 3;
         private const int LEFT = 0;
         private const int UP = 6;
@@ -26,8 +26,9 @@ namespace PacMan
         private SoundPlayer eatKibble;
         private SoundPlayer eatGhost;
 
-        public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
-            :base(frames, maze, position, direction, frameFin, aniframe, frameStart)
+        //constructor
+        public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniFrame, int frameStart)
+            :base(frames, maze, position, direction, frameFin, aniFrame, frameStart)
         {
             this.aniFrame = aniFrame;
             this.frameStart = frameStart;

@@ -1,4 +1,21 @@
-﻿using PacMan;
+﻿/* Program name: 	    PacMan
+   Project file name:   PacMan.sln
+   Author:		        Greg Seal
+   Date:	            11/11/2021
+   Language:		    C#
+   Platform:		    Microsoft Visual Studio 2019
+   Purpose:		        A game of PacMan
+   Description:		    Player moves PacMan through the maze collecting kibbles while being pursued by ghouls.  Player wins when all kibbles
+                        are collected.  Player loses when  
+   Known Bugs:		    
+   Additional Features: 3 lives
+                        Ghosts search for PacMan
+                        PacMan animates at four angles
+                        Grid is 22 X 22 to enable a 20 x 20 playing area
+                        
+*/
+
+using PacMan;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +30,7 @@ namespace Pacman
 {
     public partial class Form1 : Form
     {
+        //Constants
         private const int FORMHEIGHT = 680;
         private const int FORMWIDTH = 960;
 
@@ -27,6 +45,7 @@ namespace Pacman
 
         private int counter;
 
+        //constructor
         public Form1()
         {
             InitializeComponent();
@@ -53,31 +72,39 @@ namespace Pacman
         //timer tick
         private void timer1_Tick(object sender, EventArgs e)
         {
-            controller.PlayGame();
+            switch (controller.PlayGame())
+            {
+                case ErrorMessage.playWins:
+                    {
+                        timer1.Enabled = false;
+                        controller.PowerMusic = false;
+                        controller.BackgroundMusic();
+                        victory.Play();
+                        pictureBox2.Image = PacMan.Properties.Resources.winScreen;
+                        pictureBox2.Visible = true;
+                        break;
+                    }
+                    
+                case ErrorMessage.playerLoses:
+                    {
+                        pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
+                        pictureBox2.Visible = true;
+                        controller.PowerMusic = false;
+                        controller.BackgroundMusic();
+                        gameOver.Play();
+                        timer1.Enabled = false;
+                        break;
+                    }
+                    
+                default:
+                    {
+                        break;
+                    }
+            }
 
             if (counter == 1) //Play intro music at start of game
             {
                 gameStartMusic.PlaySync();//Playsync pauses games until music is complete  https://docs.microsoft.com/en-us/dotnet/api/system.media.soundplayer.playsync?view=windowsdesktop-5.0
-            }
-
-            //when Pacman loses all lives
-            if (controller.playerLose() == true)
-            {
-                pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
-                pictureBox2.Visible = true;
-                controller.PowerMusic = false;
-                gameOver.Play();
-                timer1.Enabled = false;
-            }
-
-            //when Pacman collects all kibble
-            if (controller.playerWin() == true)
-            {
-                timer1.Enabled = false;
-                controller.PowerMusic = false;
-                victory.Play();
-                pictureBox2.Image = PacMan.Properties.Resources.winScreen;
-                pictureBox2.Visible = true;
             }
             counter++;
         }

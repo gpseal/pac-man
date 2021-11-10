@@ -9,8 +9,10 @@ namespace PacMan
 {
     public class Ghoul : Creature
     {
+        //Constants
         private const int FRAMECOUNT = 2;
 
+        //fields
         private Random random;
         private int stringPos;
         private bool change;
@@ -19,6 +21,7 @@ namespace PacMan
         private bool jail;
         private Point startPosition;
 
+        //constructor
         public Ghoul(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
             : base(frames, maze, position, direction, frameFin, aniframe, frameStart)
         {
@@ -70,12 +73,12 @@ namespace PacMan
         //check to see if pacman is above or below ghoul, sets direction accordingly
         private void findPacMan()  
         {
-            if (position.Y > pacManYPos && maze.CurrentMap1[stringPos - 22] != 'w')
+            if ((position.Y > pacManYPos) && (maze.CurrentMap1[stringPos - 22] != 'w'))
             {
                 direction = Direction.Up;
             }
 
-            if (position.Y < pacManYPos && maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos] != 'j')  //forces ghouls to leave jail  at beginning of level
+            if ((position.Y < pacManYPos) && (maze.CurrentMap1[stringPos + 22] != 'w') && (maze.CurrentMap1[stringPos] != 'j'))  //forces ghouls to leave jail  at beginning of level
             {
                 direction = Direction.Down;
             }
@@ -89,7 +92,7 @@ namespace PacMan
             int headY = position.Y;
             stringPos = (headY * CELLS) + headX;
 
-            switch (direction) //checking to see if direction change is necessary (change if a wall is in the ghouls immediate trajectory)
+            switch (direction)                                         //checking to see if direction change is necessary (change if a wall is in the ghouls immediate trajectory)
             {
                 case Direction.Right:
                     if (maze.CurrentMap1[stringPos + 1] == 'w')
@@ -113,7 +116,7 @@ namespace PacMan
                     break;
 
                 case Direction.Down:
-                    if (maze.CurrentMap1[stringPos + 22] == 'w' || maze.CurrentMap1[stringPos + 22] == 'j')
+                    if ((maze.CurrentMap1[stringPos + 22] == 'w') || (maze.CurrentMap1[stringPos + 22] == 'j'))
                     {
                     change = true;
                     }
@@ -124,7 +127,7 @@ namespace PacMan
             {
                 int newDirection = random.Next(4);
 
-                switch (newDirection)  //sets new direction if necessary
+                switch (newDirection)                               //sets new direction if necessary
                 {
                     case 0:
                         change = false;
@@ -159,28 +162,28 @@ namespace PacMan
             switch (newDirection)
             {
                 case 0:
-                    if ((maze.CurrentMap1[stringPos + 1] != 'w') && direction != Direction.Left)
+                    if ((maze.CurrentMap1[stringPos + 1] != 'w') && (direction != Direction.Left))
                     {
                         direction = Direction.Right;
                     }
                     break;
 
                 case 1:
-                    if ((maze.CurrentMap1[stringPos - 1] != 'w') && direction != Direction.Right)
+                    if ((maze.CurrentMap1[stringPos - 1] != 'w') && (direction != Direction.Right))
                     {
                         direction = Direction.Left;
                     }
                     break;
 
                 case 2:
-                    if ((maze.CurrentMap1[stringPos - 22] != 'w') && direction != Direction.Down)
+                    if ((maze.CurrentMap1[stringPos - 22] != 'w') && (direction != Direction.Down))
                     {
                         direction = Direction.Up;
                     }
                     break;
 
                 case 3:
-                    if ((maze.CurrentMap1[stringPos + 22] != 'w') && direction != Direction.Up)
+                    if ((maze.CurrentMap1[stringPos + 22] != 'w') && (direction != Direction.Up))
                     {
                         direction = Direction.Down;
                     }

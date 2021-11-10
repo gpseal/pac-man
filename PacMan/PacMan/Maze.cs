@@ -55,9 +55,7 @@ namespace PacMan
         public Maze()
             : base()
         {
-
             //initialise fields
-
             currentMap = STARTMAP.ToCharArray();
             wall = Properties.Resources.wall;
             kibble = Properties.Resources.kibble;
@@ -153,18 +151,16 @@ namespace PacMan
                         break;
                 }
 
-                
-
             }
         }
 
+        //resets maze
         public void Reset()
         {
             nKibbles = NKIBBLES;
             currentMap = STARTMAP.ToCharArray();
         }
 
-        //public string CurrentMap { get => currentMap; set => currentMap = value; }
         public Bitmap Kibble { get => kibble; set => kibble = value; }
         public char[] CurrentMap1 { get => currentMap; set => currentMap = value; }
         public int NKibbles { get => nKibbles; set => nKibbles = value; }

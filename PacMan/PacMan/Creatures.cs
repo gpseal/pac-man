@@ -10,6 +10,7 @@ namespace PacMan
 {
     public abstract class Creature
     {
+        //Constants
         protected const int CELLS = 22;
 
         //fields
@@ -97,7 +98,7 @@ namespace PacMan
 
                 case Direction.Down:
 
-                    if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')//allows creasture to move down if a wall or jail is not in the square below
+                    if ((maze.CurrentMap1[stringPos + 22] != 'w') && (maze.CurrentMap1[stringPos + 22] != 'j'))//allows creasture to move down if a wall or jail is not in the square below
                     {
                         headY++;
                     }

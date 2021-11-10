@@ -51,6 +51,7 @@
     <Compile Include="Controller.cs" />
     <Compile Include="Creatures.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="ErrorMessage.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +59,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Ghoul.cs" />
+    <Compile Include="GhoulManager.cs" />
     <Compile Include="Maze.cs">
       <SubType>Component</SubType>
     </Compile>
