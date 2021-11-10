@@ -11,27 +11,20 @@ namespace PacMan
     public class PacMan : Creature
     {
         private const int STARTLIVES = 3;
-        private const int PACSTARTX = 10;
-        private const int PACSTARTY = 13;
-        private const int CELLS = 22;
+        //private const int PACSTARTX = 10;
+        //private const int PACSTARTY = 13;
         private const int FRAMECOUNT = 3;
+
         private const int RIGHT = 3;
         private const int LEFT = 0;
         private const int UP = 6;
         private const int DOWN = 9;
         private const int DEAD = 12;
-
-        private bool powerUp;
         private int lives;
-
-        private int rotation;
-        private bool rotate;
         private bool dead;
         private SoundPlayer pacDeath;
         private SoundPlayer eatKibble;
         private SoundPlayer eatGhost;
-
-        private int musicCounter;
 
         public PacMan(List<Bitmap> frames, Maze maze, Random random, Point position, Direction direction, int frameFin, int aniframe, int frameStart)
             :base(frames, maze, position, direction, frameFin, aniframe, frameStart)
@@ -43,27 +36,17 @@ namespace PacMan
             this.maze = maze;
             direction = Direction.Left;
             this.position = position;
-            //position = new Point(PACSTARTX, PACSTARTY);
-
-            //aniFrame = 0;
-            //frameStart = 0;
-
-            rotate = false;
-
-            rotation = 0;
-
             dead = false;
-            powerUp = false;
             lives = STARTLIVES;
+
+            // sound effects
             pacDeath = new SoundPlayer(Properties.Resources.collide);
             eatKibble = new SoundPlayer(Properties.Resources.eat);
-            //eatKibble.Play();
             eatGhost = new SoundPlayer(Properties.Resources.eatGhost);
-            musicCounter = 0;
         }
 
-
-        public override void rotateSprite()
+        //changes animation frames depending on what direction pacman is facing
+        public void rotateSprite()
         {
             switch (direction)
             {
@@ -90,16 +73,16 @@ namespace PacMan
             aniFrame = frame;
             frameStart = frame;
             frameFin = frame + FRAMECOUNT;
-            rotate = false;
         }
 
-
+        //plays eat ghost sound effect
         public void EatGhost()
         {
             eatGhost.Play();
         }
 
-        public bool EatKibble() //checks to see if pacman has landed on a square with kibble
+        //checks to see if pacman has landed on a square with kibble
+        public bool EatKibble() 
         {
             bool eat = false;
             if ((maze.CurrentMap1[stringPos] == 'k')||
@@ -111,11 +94,11 @@ namespace PacMan
                 maze.CurrentMap1[stringPos] = 'b';
                 maze.NKibbles--;
                 eatKibble.Play();
-
             }
             return eat;
         }
 
+        //resets position of Pacman
         public void PacmanReset()
         {
             position = new Point(12, 13);
@@ -124,24 +107,23 @@ namespace PacMan
             aniFrame = 0;
             frameStart = aniFrame;
             frameFin = aniFrame + FRAMECOUNT;
-            //rotate = false;
         }
 
-        public bool PowerUp() //checks to see if pacman has landed on a square with a power up
+        //checks to see if pacman has landed on a square with a power up
+        public bool PowerUp() 
         {
             bool powerUp = false;
             if (maze.CurrentMap1[stringPos] == 'P')
             { 
                 powerUp = true;
                 maze.CurrentMap1[stringPos] = 'b';
-                musicCounter = 0;
             }
             return powerUp;
         }
 
+        //if pacman has been killed, plays death sequence
         public void Dead()
         {
-            //pacDeath.PlaySync();
             if (dead == false)
             {
                 frameStart = DEAD;
@@ -153,24 +135,11 @@ namespace PacMan
             }
         }
 
-        public bool HitOpponent(Point opponentPosition)
-        {
-            bool hitOpponent = false;
-
-            if (position == opponentPosition)
-            {
-                hitOpponent = true;
-            }
-            return hitOpponent;
-        }
-
         public Direction Direction { get => direction; set => direction = value; }
-        public bool Rotate { get => rotate; set => rotate = value; }
         public Point Position { get => position; set => position = value; }
         public int StringPos { get => stringPos; set => stringPos = value; }
         public bool Dead1 { get => dead; set => dead = value; }
         public int AniFrame { get => aniFrame; set => aniFrame = value; }
         public int Lives { get => lives; set => lives = value; }
-        public int MusicCounter { get => musicCounter; set => musicCounter = value; }
     }
 }

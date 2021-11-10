@@ -16,14 +16,11 @@ namespace Pacman
         private const int FORMHEIGHT = 680;
         private const int FORMWIDTH = 960;
 
-        //declare the Maze object so it can be used throughout the form
         private Maze maze;
         private Random random;
         private Controller controller;
-        private int deadCount;
-        private Bitmap gameEnd;
 
-        private Bitmap wall;
+        //SOUND EFFECTS
         private SoundPlayer gameOver;
         private SoundPlayer victory;
         private SoundPlayer gameStartMusic;
@@ -39,52 +36,45 @@ namespace Pacman
             Left = 0;
             Height = FORMHEIGHT;
             Width = FORMWIDTH;
+
             KeyPreview = true;
-
             random = new Random();
-
-            // create an instance of a Maze:
             maze = new Maze();
-            //SetUpDataGridView();// settings for maze grid
-
-            // important, need to add the maze object to the list of controls on the form
-            Controls.Add(maze);
-
+            Controls.Add(maze); // important, need to add the maze object to the list of controls on the form
             controller = new Controller(maze, random, textBox1, textBox2);
-            //controller.StartNewGame();
-            deadCount = 0;
-
-            // remember the Timer Enabled Property is set to false as a default
             timer1.Enabled = true;
-            gameOver = new SoundPlayer(PacMan.Properties.Resources.EndGame);
+            counter = 0;
+
+            gameOver = new SoundPlayer(PacMan.Properties.Resources.game_over);
             gameStartMusic = new SoundPlayer(PacMan.Properties.Resources.pacman_beginning);
             victory = new SoundPlayer(PacMan.Properties.Resources.victory);
-
-            //gameOver.Stream = PacMan.Properties.Resources.EndGame;
-            counter = 0;
         }
 
+        //timer tick
         private void timer1_Tick(object sender, EventArgs e)
         {
             controller.PlayGame();
 
-            if (counter == 1)
+            if (counter == 1) //Play intro music at start of game
             {
-                //controller.BackgroundMusic();
-                gameStartMusic.PlaySync();
+                gameStartMusic.PlaySync();//Playsync pauses games until music is complete  https://docs.microsoft.com/en-us/dotnet/api/system.media.soundplayer.playsync?view=windowsdesktop-5.0
             }
 
+            //when Pacman loses all lives
             if (controller.playerLose() == true)
             {
                 pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
                 pictureBox2.Visible = true;
+                controller.PowerMusic = false;
                 gameOver.Play();
                 timer1.Enabled = false;
             }
 
+            //when Pacman collects all kibble
             if (controller.playerWin() == true)
             {
                 timer1.Enabled = false;
+                controller.PowerMusic = false;
                 victory.Play();
                 pictureBox2.Image = PacMan.Properties.Resources.winScreen;
                 pictureBox2.Visible = true;
@@ -92,9 +82,10 @@ namespace Pacman
             counter++;
         }
 
-        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
+        //setting direction of pacman
+        private void Form1_KeyDown_1(object sender, KeyEventArgs e) 
         {
-            if (controller.pacManDead() == false)
+            if (controller.pacManDead() == false) //if pacman is alive he can change direction
             {
                 switch (e.KeyCode)
                 {
@@ -118,19 +109,19 @@ namespace Pacman
                         break;
                 }
             }
-
         }
 
-        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        //Menu item to reset game
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)  
         {
-            
             controller.Reset();
             timer1.Enabled = true;
             pictureBox2.Visible = false;
             counter = 0;
         }
 
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        //Menu item to quite game
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)  
         {
             System.Windows.Forms.Application.ExitThread();
         }

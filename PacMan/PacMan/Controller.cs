@@ -17,16 +17,14 @@ namespace PacMan
     {
         private const int PACFRAMECOUNT = 24;
         private const int GHOULFRAMECOUNT = 4;
+        private const int PACMANSTARTX = 11;
+        private const int PACMANSTARTY = 13;
+        private const int GHOULSTARTX = 9;
+        private const int GHOULSTARTY = 11;
 
         private Random random;
         private PacMan pacman;
-        //private Ghoul ghoul1;
-        //private Ghoul ghoul2;
-        //private Ghoul ghoul3;
-        //private Ghoul ghoul4;
         private Maze maze;
-        private Bitmap frame;
-        private int pacManLives;
         
         private List<Bitmap> pacmanFrames;
         private List<Bitmap> ghoul1Frames;
@@ -44,41 +42,35 @@ namespace PacMan
         private SoundPlayer gameOver;
         private WindowsMediaPlayer Player;
         private WindowsMediaPlayer powerPlayer;
-        private string rootFolder;
         private string path;
         private string wakkaSound;
         private string wakkaPath;
         private string scaredGhosts;
         private bool powerMusic;
-        private bool musicPlaying;
-
         private int musicCounter;
 
-        public int MusicCounter { get => musicCounter; set => musicCounter = value; }
-
+        //Constructor
         public Controller(Maze maze, Random random, TextBox textBox1, TextBox textBox2)
         {
-            pacManLives = 3;
             this.maze = maze;
             this.random = random;
             this.textBox1 = textBox1;
             this.textBox2 = textBox2;
+
             score = 0;
-            //textBox1.Text = score.ToString();
             pacmanFrames = new List<Bitmap>(); //creating list of animation framse for pacman
-            for (int i = 1; i < PACFRAMECOUNT+1; i++)
+            for (int i = 1; i < PACFRAMECOUNT+1; i++)//populating animation list
             {
                 Bitmap frame = (Bitmap)Properties.Resources.ResourceManager.GetObject("pacMan_" + i.ToString());
                 pacmanFrames.Add(new Bitmap(frame));
             }
 
-            ghoul1Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
-            ghoul2Frames = new List<Bitmap>(); //creating list of animation framse for ghouls
-            ghoul3Frames = new List<Bitmap>(); //creating list of animation frames for ghouls
-            ghoul4Frames = new List<Bitmap>(); //creating list of animation frames for ghouls
+            ghoul1Frames = new List<Bitmap>(); //creating list of animation framse for ghoul1
+            ghoul2Frames = new List<Bitmap>(); //creating list of animation framse for ghoul2
+            ghoul3Frames = new List<Bitmap>(); //creating list of animation frames for ghoul3
+            ghoul4Frames = new List<Bitmap>(); //creating list of animation frames for ghoul4
 
-
-            for (int i = 0; i < GHOULFRAMECOUNT; i++)
+            for (int i = 0; i < GHOULFRAMECOUNT; i++)//populating animation lists
             {
                 Bitmap frame = (Bitmap)Properties.Resources.ResourceManager.GetObject("ghoul" + i.ToString());
                 ghoul1Frames.Add(new Bitmap(frame));
@@ -93,17 +85,15 @@ namespace PacMan
                 ghoul4Frames.Add(new Bitmap(frame));
             }
 
-
-
-            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
+            pacman = new PacMan(pacmanFrames, maze, random, new Point(PACMANSTARTX, PACMANSTARTY), Direction.Left, 3, 0, 0);
 
             ghouls = new List<Ghoul>();
-            ghouls.Add(new Ghoul(ghoul1Frames, maze, random, new Point(12, 11), Direction.Up, 2, 0, 0));
-            ghouls.Add(new Ghoul(ghoul2Frames, maze, random, new Point(11, 11), Direction.Up, 2, 0, 0));
-            ghouls.Add(new Ghoul(ghoul3Frames, maze, random, new Point(10, 11), Direction.Up, 2, 0, 0));
-            ghouls.Add(new Ghoul(ghoul4Frames, maze, random, new Point(9, 11), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul1Frames, maze, random, new Point(GHOULSTARTX, GHOULSTARTY), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul2Frames, maze, random, new Point(GHOULSTARTX + 1, GHOULSTARTY), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul3Frames, maze, random, new Point(GHOULSTARTX + 2, GHOULSTARTY), Direction.Up, 2, 0, 0));
+            ghouls.Add(new Ghoul(ghoul4Frames, maze, random, new Point(GHOULSTARTX + 3, GHOULSTARTY), Direction.Up, 2, 0, 0));
 
-            ghoulStart = 9;
+            ghoulStart = GHOULSTARTX;
             counter = 0;
             pacPower = false;
 
@@ -118,30 +108,18 @@ namespace PacMan
 
             musicCounter = 0;
             powerMusic = false;
-            musicPlaying = false;
-            Player = new WMPLib.WindowsMediaPlayer();
+            Player = new WMPLib.WindowsMediaPlayer(); //https://docs.microsoft.com/en-us/windows/win32/wmp/embedding-the-windows-media-player-control-in-a-c--solution
             Player.URL = wakkaPath;
             powerPlayer = new WMPLib.WindowsMediaPlayer();
             powerPlayer.URL = scaredGhosts;
             powerPlayer.controls.stop();
-
+            Player.settings.setMode("loop", true);
+            powerPlayer.settings.setMode("loop", true);
         }
 
-        //public void PlayFile(String url)  //https://docs.microsoft.com/en-us/windows/win32/wmp/creating-the-windows-media-player-control-programmatically?redirectedfrom=MSDN
-        //{
-        //    Player = null;
-        //    Player = new WMPLib.WindowsMediaPlayer();
-        //    Player.controls.stop();
-        //    Player.URL = url;
-        //    Player.settings.setMode("loop", true);
-        //    Player.controls.play();
-        //    musicPlaying = true;
-        //}
-
-
+        //resets game
         public void Reset()
         {
-            
             foreach (Ghoul ghoul in ghouls)
             {
                 ghoul.Position = new Point(ghoulStart, 11);
@@ -149,15 +127,13 @@ namespace PacMan
             }
 
             pacman = null;
-            pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
-
+            pacman = new PacMan(pacmanFrames, maze, random, new Point(PACMANSTARTX, PACMANSTARTY), Direction.Left, 3, 0, 0);
             maze.Reset();
             score = 0;
-            ghoulStart = 9;
+            ghoulStart = GHOULSTARTX;
         }
 
-
-
+        //returns sprites to starting positions
         public void StartNewLife()
         {
             foreach (Ghoul ghoul in ghouls)
@@ -165,24 +141,11 @@ namespace PacMan
                 ghoul.Position = new Point(ghoulStart, 11);
                 ghoulStart++;
             }
-            //pacman = new PacMan(pacmanFrames, maze, random, new Point(12, 13), Direction.Left, 3, 0, 0);
             pacman.PacmanReset();
-
-
-            ghoulStart = 9;
+            ghoulStart = GHOULSTARTX;
         }
 
-        //public void BackgroundMusic(string path) //https://docs.microsoft.com/en-us/windows/win32/wmp/creating-the-windows-media-player-control-programmatically?redirectedfrom=MSDN
-        //{
-        //    //if (Player.playState == WMPPlayState.wmppsPlaying)
-        //    //{
-        //    //    Player.controls.stop();
-        //    //}
-        //    PlayFile(path);
-        //    //Player.controls.play();
-        //    musicCounter = 1;
-        //}
-
+        //plays & changes background music
         public void BackgroundMusic()
         {
             if (powerMusic == true)
@@ -202,47 +165,40 @@ namespace PacMan
                 Player.controls.stop();
                 powerPlayer.controls.stop();
             }
-            //Player.controls.play();
-            Player.settings.setMode("loop", true);
-            powerPlayer.settings.setMode("loop", true);
         }
 
+        //runs game
         public void PlayGame()
         {
-
             textBox2.Text = pacman.Lives.ToString().PadLeft(7, '0');
-
             counter++;
             maze.Draw();
 
-            if (pacman.PowerUp() == true)
+            if (pacman.PowerUp() == true) //checks to see if pacman has collected a power up
             {
                 pacPower = true;
             }
 
-            if (pacPower == true)
+            if (pacPower == true) //changes ghoul state so that they can be eaten
             {
-
                 foreach (Ghoul ghoul in ghouls)
                 {
                     ghoul.Scared = true;
                     ghoul.ScaredGhost();
                 }
-
-                counter = 0;
+                counter = 0;//counter for pacman power up
                 pacPower = false;
-                powerMusic = true;
+                powerMusic = true;//changes background music
             }
 
-            if (counter > 45)
+            if (counter > 45)  //turns off pacman powerup mode
             {
                 powerMusic = false;
-                pacman.MusicCounter = 0;
                 foreach (Ghoul ghoul in ghouls)
                 {
                     ghoul.Scared = false;
                     ghoul.ScaredGhost();
-                    ghoul.Jail = false;
+                    ghoul.Jail = false; //enables ghoul movement in jail
                 }
             }
 
@@ -250,7 +206,7 @@ namespace PacMan
             {
                 if (pacman.Dead1 == false && ghoul.Jail == false)
                 {
-                    if ((ghoul.Scared == true) && (counter % 2 == 0))
+                    if ((ghoul.Scared == true) && (counter % 2 == 0))//slows movement of ghouls by preventing movement every second frame
                     {
 
                     }
@@ -258,28 +214,25 @@ namespace PacMan
                     {
                         ghoul.Move();
                     }
-
                     ghoul.ChangeDirection();
                     ghoul.CheckForGaps();
                     ghoul.PacManPosition(pacman.Position.Y);
                 }
+
                 ghoul.Draw();
                 ghoul.PacManPosition(pacman.Position.Y);
 
-                if (pacman.HitOpponent(ghoul.Position)&& ghoul.Scared == true)
+                if (pacman.HitOpponent(ghoul.Position)&& ghoul.Scared == true) //ghoul gets eaten
                 {
                     ghoul.Dead();
                     pacman.EatGhost();
+                    score += 10;
                 }
 
-                else if (pacman.HitOpponent(ghoul.Position) && pacman.Dead1 == false)
+                else if (pacman.HitOpponent(ghoul.Position) && pacman.Dead1 == false) //pacman dies
                 {
-                    //pacDeath.Play();
                     pacman.Dead();
                 }
-
-
-                
             }
 
             if (pacman.Dead1 == false)
@@ -289,8 +242,7 @@ namespace PacMan
 
             pacman.Draw();
 
-
-            if (pacman.EatKibble() == true)
+            if (pacman.EatKibble() == true)  //redraws game if pacman eats kibble
             {
                 maze.Draw();
                 pacman.Draw();
@@ -298,8 +250,6 @@ namespace PacMan
                 {
                     ghoul.Draw();
                 }
-
-                //dead.PlaySync();
                 score++;
                 textBox1.Text = score.ToString().PadLeft(7, '0');
             }
@@ -310,45 +260,45 @@ namespace PacMan
                 {
                     ghoul.Dead();
                     pacman.EatGhost();
+                    score += 10;
                 }
 
                 else if (pacman.HitOpponent(ghoul.Position))
                 {
-                    //pacman.Dead1 = true;
-                    //pacDeath.Play();
                     pacman.Dead();
                 }
             }
 
-            if (pacman.AniFrame == 23)
+            if (pacman.AniFrame == 23)//pacman dies after death animation completes
             {
                 if (pacman.Lives != 0)
                 {
                     StartNewLife();
                 }
             }
-
             BackgroundMusic();
         }
 
+        //sets direction of pacman
         public void SetPacManDirection(Direction direction)
         {
-            pacman.Rotate = true;
             pacman.Direction = direction;
             pacman.rotateSprite();
         }
 
-
+        //checks if pacman has lost all lives
         public bool playerLose()
         {
             bool lose = false;
             if (pacman.Lives == 0)
             {
                 lose = true;
+                textBox2.Text = pacman.Lives.ToString().PadLeft(7, '0');
             }
             return lose;
         }
 
+        //checks if pacman has collected all kibble
         public bool playerWin()
         {
             bool win = false;
@@ -360,7 +310,7 @@ namespace PacMan
             return win;
         }
 
-
+        //checks to see if pacman has lost a life
         public bool pacManDead()
         {
             bool pacManDead = false;
@@ -369,8 +319,10 @@ namespace PacMan
             {
                 pacManDead = true;
             }
-
             return pacManDead;
         }
+
+        public int MusicCounter { get => musicCounter; set => musicCounter = value; }
+        public bool PowerMusic { get => powerMusic; set => powerMusic = value; }
     }
 }

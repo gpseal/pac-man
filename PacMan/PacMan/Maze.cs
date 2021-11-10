@@ -10,6 +10,7 @@ namespace PacMan
 {
     public class Maze : DataGridView
     {
+        //Constants
         private const int NROWSCOLUMNS = 22;                          // Number of cells in each row and column
         private const int CELLSIZE = 30;
         private const int SPACESIZE = 4;
@@ -24,7 +25,7 @@ namespace PacMan
                                 "wlwwwlwlkkwwckiwlwwwlw" +
                                 "wlkkkiwwwlwwlwwwlkkkiw" +
                                 "wwwwwlwckikkikkwlwwwww" +
-                                "wwwwwlwlwjjjjwlwlwwwww" +
+                                "wwwwwlwlwwjjwwlwlwwwww" +
                                 "pkkkkikiwjjjjwlkikkkkp" +
                                 "wwwwwlwlwjjjjwlwlwwwww" +
                                 "wwwwwlwlwwwwwwlwlwwwww" +
@@ -55,7 +56,6 @@ namespace PacMan
             : base()
         {
 
-            CellBorderStyle = DataGridViewCellBorderStyle.None;
             //initialise fields
 
             currentMap = STARTMAP.ToCharArray();
@@ -68,7 +68,6 @@ namespace PacMan
             pipe = Properties.Resources.pipe;
             power = Properties.Resources.power;
             nKibbles = NKIBBLES;
-
 
             // set position of maze on the Form
             Top = 1;
@@ -88,6 +87,7 @@ namespace PacMan
             ScrollBars = ScrollBars.None;
             ColumnHeadersVisible = false;
             RowHeadersVisible = false;
+            CellBorderStyle = DataGridViewCellBorderStyle.None;
 
             // set size of cells:
             foreach (DataGridViewRow r in this.Rows)
@@ -105,14 +105,11 @@ namespace PacMan
             AllowUserToResizeRows = false;
         }
 
-        
-
         //to draw the maze, the string character is used to load the corresponding image into the DataGridView cell
         public void Draw()
         {
             int wCount = 1;
             int totalCells = NROWSCOLUMNS * NROWSCOLUMNS;
-            int count = 0;
             for (int i = 0; i < totalCells; i++)
             {
                 

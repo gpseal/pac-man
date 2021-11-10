@@ -19,10 +19,6 @@ namespace PacMan
         protected int stringPos;
         protected Direction direction;
         protected bool change;
-        //private int DOWN;
-        //private int RIGHT;
-        //private int LEFT;
-        //private int UP;
         protected int frame;
         protected bool rotate;
         protected int aniFrame;
@@ -41,6 +37,7 @@ namespace PacMan
             this.direction = direction;
         }
 
+        //draws creature
         public void Draw()
         {
             aniFrame++;
@@ -51,90 +48,58 @@ namespace PacMan
         maze.Rows[position.Y].Cells[position.X].Value = frames[aniFrame];
         }
 
-
-        public abstract void rotateSprite();
-
+        //moves creature
         public void Move()
         {
             int headX = position.X;
             int headY = position.Y;
-            stringPos = (headY * CELLS) + headX;
-
-            //change = true;
+            stringPos = (headY * CELLS) + headX; //finds equivalent position in maze string
 
             switch (direction)
             {
                 case Direction.Right:
-                    //rotateSprite(RIGHT);
 
-                    if (stringPos == 240)
+                    if (maze.CurrentMap1[stringPos + 1] == 'p') //teleport square
                     {
                         headX = headX - 19;
                     }
 
-                    else if (maze.CurrentMap1[stringPos + 1] != 'w')
+                    else if (maze.CurrentMap1[stringPos + 1] != 'w')//allows creasture to move right if a wall is not in the next square
                     {
                         headX++;
-                    }
-
-                    else
-                    {
-                        change = true;
                     }
 
                     break;
 
                 case Direction.Left:
 
-                    //rotateSprite(LEFT);
-
-
-                    if (stringPos == 221)
+                    if (maze.CurrentMap1[stringPos - 1] == 'p') //teleport square
                     {
                         headX = headX + 19;
 
                     }
 
-                    else if (maze.CurrentMap1[stringPos - 1] != 'w')
+                    else if (maze.CurrentMap1[stringPos - 1] != 'w') //allows creasture to move left if a wall is not in the next square
                     {
                         headX--;
-                    }
-
-                    else
-                    {
-                        change = true;
                     }
 
                     break;
 
                 case Direction.Up:
 
-                    //rotateSprite(UP);
-
-                    if (maze.CurrentMap1[stringPos - 22] != 'w')
+                    if (maze.CurrentMap1[stringPos - 22] != 'w') //allows creasture to move up if a wall is not in the square above
                     {
                         headY--;
-                    }
-
-                    else
-                    {
-                        change = true;
                     }
 
                     break;
 
                 case Direction.Down:
 
-                    //rotateSprite(DOWN); //9 represents start frame of downward animation sequence
-
-                    if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')
+                    if (maze.CurrentMap1[stringPos + 22] != 'w' && maze.CurrentMap1[stringPos + 22] != 'j')//allows creasture to move down if a wall or jail is not in the square below
                     {
                         headY++;
-                    }
-
-                    else
-                    {
-                        change = true;
                     }
 
                     break;
@@ -146,19 +111,17 @@ namespace PacMan
             position = new Point(headX, headY);
         }
 
+        //checks to see if creature is on the same square as an opponent
+        public bool HitOpponent(Point opponentPosition)
+        {
+            bool hitOpponent = false;
 
-
-        //public bool HitOpponent(Point opponentPosition)
-        //{
-        //    bool hitOpponent = false;
-
-        //    if (positions[0] == frogPosition)
-        //    {
-        //        eatenfrog = true;
-        //    }
-
-        //    return hitOpponent;
-        //}
+            if (position == opponentPosition)
+            {
+                hitOpponent = true;
+            }
+            return hitOpponent;
+        }
 
     }
 
