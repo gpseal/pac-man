@@ -1146,5 +1146,17 @@
   <ItemGroup>
     <None Include="Resources\game_over.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chomp.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loseScreen2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level1.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

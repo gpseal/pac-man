@@ -15,26 +15,20 @@ namespace PacMan
 {
     class Sound
     {
+        //fields
         private SoundPlayer dead;
-        private SoundPlayer gameOver;
         private WindowsMediaPlayer Player;
         private WindowsMediaPlayer powerPlayer;
         private string path;
-        private string wakkaSound;
         private string wakkaPath;
         private string scaredGhosts;
         private bool powerMusic;
-
-        public bool PowerMusic1 { get => powerMusic; set => powerMusic = value; }
 
         public Sound()
         {
             dead = new SoundPlayer();
             dead.Stream = Properties.Resources.KibbleEat;
-            gameOver = new SoundPlayer(Properties.Resources.EndGame);
-
             path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName); //https://stackoverflow.com/questions/14899422/how-to-navigate-a-few-folders-up
-            wakkaSound = "/Resources/wakka.wav";
             wakkaPath = path + "/Resources/wakka.wav";
             scaredGhosts = path + "/Resources/pacman_intermission.wav";            
             Player = new WMPLib.WindowsMediaPlayer(); //https://docs.microsoft.com/en-us/windows/win32/wmp/embedding-the-windows-media-player-control-in-a-c--solution
@@ -47,24 +41,28 @@ namespace PacMan
             powerMusic = false;
         }
 
+        //plays music if Pacman eats powerup
         public void PowerMusic()
         {
             Player.controls.stop();
             powerPlayer.controls.play();
         }
 
+        //plays standard background sound
         public void Waka()
         {
             Player.controls.play();
             powerPlayer.controls.stop();
         }
 
+        //stops background music / sound
         public void Stop()
         {
             Player.controls.stop();
             powerPlayer.controls.stop();
         }
 
+        //sets background music
         public void BackgroundMusic(int kibbles, bool playerLose, bool dead)
         {
             if (powerMusic == true)
@@ -83,7 +81,6 @@ namespace PacMan
             }
         }
 
-
-
+        public bool PowerMusic1 { get => powerMusic; set => powerMusic = value; }
     }
 }

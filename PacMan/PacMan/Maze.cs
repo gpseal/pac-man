@@ -21,27 +21,51 @@ namespace PacMan
         private const int NKIBBLES = 208;
 
         private const string STARTMAP = "wwwwwwwwwwwwwwwwwwwwww" +
-                                "wckPkkkkkkwwckkkkkPkkw" +
-                                "wlwwlwwwwlwwlwwwwlwwlw" +
-                                "wlwwlwwwwlwwlwwwwlwwlw" +
-                                "wlkkikkkkikkikkkkikkiw" +
-                                "wlwwwlwlwwwwwwlwlwwwlw" +
-                                "wlwwwlwlkkwwckiwlwwwlw" +
-                                "wlkkkiwwwlwwlwwwlkkkiw" +
-                                "wwwwwlwckikkikkwlwwwww" +
-                                "wwwwwlwlwwjjwwlwlwwwww" +
-                                "pkkkkikiwjjjjwlkikkkkp" +
-                                "wwwwwlwlwjjjjwlwlwwwww" +
-                                "wwwwwlwlwwwwwwlwlwwwww" +
-                                "wckkkiwlkkkkkkiwlkkkkw" +
-                                "wlwwwlwlwwwwwwlwlwwwlw" +
-                                "wlkwlikikkwwckikikwciw" +
-                                "wwlwlwwwwlwwlwwwwlwlww" +
-                                "wwlwlkkkkikkikkkkiwlww" +
-                                "wcikiwwlwwwwwwlwwlkkkw" +
-                                "wlwwwwwlkkwwckiwwwwwlw" +
-                                "wlkkPkkiwlkkiwlkkPkkiw" +
-                                "wwwwwwwwwwwwwwwwwwwwww";
+                                        "wckPkkkkkkwwckkkkkPkkw" +
+                                        "wlwwlwwwwlwwlwwwwlwwlw" +
+                                        "wlwwlwwwwlwwlwwwwlwwlw" +
+                                        "wlkkikkkkikkikkkkikkiw" +
+                                        "wlwwwlwlwwwwwwlwlwwwlw" +
+                                        "wlwwwlwlkkwwckiwlwwwlw" +
+                                        "wlkkkiwwwlwwlwwwlkkkiw" +
+                                        "wwwwwlwckikkikkwlwwwww" +
+                                        "wwwwwlwlwwjjwwlwlwwwww" +
+                                        "pkkkkikiwjjjjwlkikkkkp" +
+                                        "wwwwwlwlwjjjjwlwlwwwww" +
+                                        "wwwwwlwlwwwwwwlwlwwwww" +
+                                        "wckkkiwlkkkkkkiwlkkkkw" +
+                                        "wlwwwlwlwwwwwwlwlwwwlw" +
+                                        "wlkwlikikkwwckikikwciw" +
+                                        "wwlwlwwwwlwwlwwwwlwlww" +
+                                        "wwlwlkkkkikkikkkkiwlww" +
+                                        "wcikiwwlwwwwwwlwwlkkkw" +
+                                        "wlwwwwwlkkwwckiwwwwwlw" +
+                                        "wlkkPkkiwlkkiwlkkPkkiw" +
+                                        "wwwwwwwwwwwwwwwwwwwwww";
+
+        private const string STARTMAP2 = "wwwwwwwwwwwwwwwwwwwwww" +
+                                        "wbkkkkkkkkPkkkkkkkkkbw" +
+                                        "wlwlwlwlwlwwlwlwlwlwlw" +
+                                        "wlwlwlwlwlwwlwlwlwlwlw" +
+                                        "wlwlwlwlwlwwlwlwlwlwlw" +
+                                        "wlwlwlwlwlwwlwlwlwlwlw" +
+                                        "wlwlwlwlwkwwcwlwlwlwlw" +
+                                        "wlwlwlwlwlwwlwlwlwlwlw" +
+                                        "wlwlwlwlkikkiklwlwlwlw" +
+                                        "wlwlwlwlwwjjwwlwlwlwlw" +
+                                        "pPwlwlwPwjjjjwPwlwlwPp" +
+                                        "wlwlwlwlwjjjjwlwlwlwlw" +
+                                        "wlwlwlwlwwwwwwlwlwlwlw" +
+                                        "wlwlwlwlkkkkkklwlwlwlw" +
+                                        "wlwlwlwlwlwwkwlwlwlwlw" +
+                                        "wlwlwlwlwlwwcwlwlwlwlw" +
+                                        "wlwlwlwlwlwwlwlwlwlwlw" +
+                                        "wlwlwlwlwbkkbwlwlwlwlw" +
+                                        "wlwlwlwlwwwwwwlwlwlwlw" +
+                                        "wlwlwlwlwkwwcwlwlwlwlw" +
+                                        "wbkkkkkkkkkPkkkkkkkkbw" +
+                                        "wwwwwwwwwwwwwwwwwwwwww";
+
 
         //fields
         private char[] currentMap;
@@ -159,10 +183,19 @@ namespace PacMan
         }
 
         //resets maze
-        public void Reset()
+        public void Reset(int level)
         {
+            if (level == 2)
+            {
+                currentMap = STARTMAP2.ToCharArray();
+            }
+
+            else
+            {
+                currentMap = STARTMAP.ToCharArray();
+            }
             nKibbles = NKIBBLES;
-            currentMap = STARTMAP.ToCharArray();
+            
         }
 
         public Bitmap Kibble { get => kibble; set => kibble = value; }

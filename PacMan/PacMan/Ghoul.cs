@@ -163,7 +163,8 @@ namespace PacMan
         {
             int newDirection = random.Next(4);                      //in each timer tick, ghouls will use random number to set direction, if no wall is present,
                                                                     //ghoul will move in this direction, otherwise continue on their path
-            findPacMan();                                           
+            findPacMan();                                           //ghoul will set y direction to find pacman, but will only move in selected direction if no wall is present
+                                                                    // and depending on the result of the below switch
 
             switch (newDirection)
             {

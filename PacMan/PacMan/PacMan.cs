@@ -48,7 +48,7 @@ namespace PacMan
 
             // sound effects
             pacDeath = new SoundPlayer(Properties.Resources.collide);
-            eatKibble = new SoundPlayer(Properties.Resources.eat);
+            eatKibble = new SoundPlayer(Properties.Resources.chomp);
             eatGhost = new SoundPlayer(Properties.Resources.eatGhost);
         }
 

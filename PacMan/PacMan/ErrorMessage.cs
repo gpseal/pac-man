@@ -14,6 +14,7 @@ namespace PacMan
     {
         playWins,
         playerLoses,
+        completeLevel,
         noError
     }
 }

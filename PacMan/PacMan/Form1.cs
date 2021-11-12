@@ -9,13 +9,15 @@
                         are collected.  Player loses when  
    Known Bugs:		    
    Additional Features: 3 lives
+                        2 levels
                         Ghosts search for PacMan
                         PacMan animates at four angles
                         Grid is 22 X 22 to enable a 20 x 20 playing area
-                        Player can reset game if necessary
+                        Player can reset game if necessary via drop down menu
                         PacMan can power up and consume ghosts.
                         Characters can teleport on appropriate squares
                         Ending music has been added
+                        4 Ghouls instead of three
 */
 
 using PacMan;
@@ -37,6 +39,7 @@ namespace Pacman
         private const int FORMHEIGHT = 680;
         private const int FORMWIDTH = 960;
 
+        //fields
         private Maze maze;
         private Random random;
         private Controller controller;
@@ -66,9 +69,10 @@ namespace Pacman
             controller = new Controller(maze, random, textBox1, textBox2);
             timer1.Enabled = true;
             counter = 0;
-
+            pictureBox2.Image = PacMan.Properties.Resources.level1;
             gameOver = new SoundPlayer(PacMan.Properties.Resources.game_over);
             gameStartMusic = new SoundPlayer(PacMan.Properties.Resources.pacman_beginning);
+            
             victory = new SoundPlayer(PacMan.Properties.Resources.victory);
         }
 
@@ -77,6 +81,12 @@ namespace Pacman
         {
             switch (controller.PlayGame())
             {
+                case ErrorMessage.completeLevel:
+                    {
+                        counter = -1;
+                        break;
+                    }
+
                 case ErrorMessage.playWins:
                     {
                         timer1.Enabled = false;
@@ -89,7 +99,15 @@ namespace Pacman
                     
                 case ErrorMessage.playerLoses:
                     {
-                        pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
+                        if (controller.Level == 2)
+                        {
+                            pictureBox2.Image = PacMan.Properties.Resources.loseScreen2;
+                        }
+                        else
+                        {
+                            pictureBox2.Image = PacMan.Properties.Resources.loseScreen;
+                        }
+                        
                         pictureBox2.Visible = true;
                         controller.Music();
                         gameOver.Play();
@@ -103,9 +121,23 @@ namespace Pacman
                     }
             }
 
+            if (counter == 0)
+            {
+                if (controller.Level == 2) 
+                {
+                    pictureBox2.Image = PacMan.Properties.Resources.level2; //displays level intro
+                }
+                else
+                {
+                    pictureBox2.Image = PacMan.Properties.Resources.level1; //displays level intro
+                }
+
+                pictureBox2.Visible = true;
+            }
             if (counter == 1) //Play intro music at start of game
             {
                 gameStartMusic.PlaySync();//Playsync pauses games until music is complete  https://docs.microsoft.com/en-us/dotnet/api/system.media.soundplayer.playsync?view=windowsdesktop-5.0
+                pictureBox2.Visible = false;
             }
             counter++;
         }
@@ -144,11 +176,12 @@ namespace Pacman
         {
             controller.Reset();
             timer1.Enabled = true;
+
             pictureBox2.Visible = false;
             counter = 0;
         }
 
-        //Menu item to quite game
+        //Menu item to quit game
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)  
         {
             System.Windows.Forms.Application.ExitThread();

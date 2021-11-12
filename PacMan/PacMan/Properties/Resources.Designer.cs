@@ -83,6 +83,15 @@ namespace PacMan.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream chomp {
+            get {
+                return ResourceManager.GetStream("chomp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream collide {
             get {
                 return ResourceManager.GetStream("collide", resourceCulture);
@@ -346,9 +355,49 @@ namespace PacMan.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap level1 {
+            get {
+                object obj = ResourceManager.GetObject("level1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap level2 {
+            get {
+                object obj = ResourceManager.GetObject("level2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loseScreen {
             get {
                 object obj = ResourceManager.GetObject("loseScreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loseScreen2 {
+            get {
+                object obj = ResourceManager.GetObject("loseScreen2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loseScreen21 {
+            get {
+                object obj = ResourceManager.GetObject("loseScreen21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
