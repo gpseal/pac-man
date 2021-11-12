@@ -7,17 +7,19 @@
    Purpose:		        A game of PacMan
    Description:		    Player moves PacMan through the maze collecting kibbles while being pursued by ghouls.  Player wins when all kibbles
                         are collected.  Player loses when  
-   Known Bugs:		    
+   Known Bugs:		    Slight delay between pacman collecting power up and gaining ability to consume ghouls
    Additional Features: 3 lives
                         2 levels
                         Ghosts search for PacMan
                         PacMan animates at four angles
-                        Grid is 22 X 22 to enable a 20 x 20 playing area
                         Player can reset game if necessary via drop down menu
                         PacMan can power up and consume ghosts.
                         Characters can teleport on appropriate squares
                         Ending music has been added
                         4 Ghouls instead of three
+                        Original game images and animation frames
+
+                        Grid is 22 X 22 to enable a 20 x 20 playing area
 */
 
 using PacMan;
