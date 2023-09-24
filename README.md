@@ -28,3 +28,8 @@
    - Ending music has been added
    - 4 Ghouls instead of three
    - Grid is 22 X 22 to enable a 20 x 20 playing area
+
+     ![image](https://github.com/gpseal/pac-man/assets/83617997/187d3aed-2428-47ef-b6d5-b3ee8f375174)
+     ![image](https://github.com/gpseal/pac-man/assets/83617997/1825cd7d-4251-4e58-b76d-b5d4a8c63173)
+
+
