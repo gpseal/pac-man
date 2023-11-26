@@ -1,5 +1,11 @@
 # PacMan Assignment
 
+### Game can be played by downloading and installing contents of PacMan.rar
+
+https://github.com/gpseal/pac-man/assets/83617997/71c5be58-87f8-4eb9-a189-430be717eab4
+
+
+
    Project file name:   PacMan.sln
    
    Author:		        Greg Seal
